@@ -1,0 +1,204 @@
+{
+  "travel_agents": [
+    {
+      "agent_id": "AG001",
+      "agent_name": "EuroTravel Agency",
+      "founded_year": 2010,
+      "country": "France",
+      "contact": {
+        "phone": "+33-1-4523-7890",
+        "email": "info@eurotravel.fr",
+        "website": "www.eurotravel.fr",
+        "address": "45 Rue de Lyon, 75012 Paris"
+      },
+      "specializations": [
+        "European Tourism",
+        "Cultural Tours",
+        "Business Travel"
+      ],
+      "employee_count": 24,
+      "annual_bookings": 8500,
+      "average_booking_value_eur": 1850
+    },
+    {
+      "agent_id": "AG002",
+      "agent_name": "Adventure Seekers Ltd",
+      "founded_year": 2015,
+      "country": "United Kingdom",
+      "contact": {
+        "phone": "+44-20-7946-0958",
+        "email": "bookings@adventureseeker.uk",
+        "website": "www.adventureseeker.co.uk",
+        "address": "88 Baker Street, London W1U 6RJ"
+      },
+      "specializations": [
+        "Adventure Tourism",
+        "Wellness Retreats",
+        "Group Travel"
+      ],
+      "employee_count": 18,
+      "annual_bookings": 6200,
+      "average_booking_value_eur": 2150
+    },
+    {
+      "agent_id": "AG003",
+      "agent_name": "Global Trips Germany",
+      "founded_year": 2008,
+      "country": "Germany",
+      "contact": {
+        "phone": "+49-30-2061-1234",
+        "email": "kontakt@globaltrips.de",
+        "website": "www.globaltrips.de",
+        "address": "Kurfürstendamm 26, 10719 Berlin"
+      },
+      "specializations": [
+        "European Tours",
+        "Business Conferences",
+        "Romance Packages"
+      ],
+      "employee_count": 32,
+      "annual_bookings": 12000,
+      "average_booking_value_eur": 1650
+    },
+    {
+      "agent_id": "AG004",
+      "agent_name": "Mediterranean Dreams",
+      "founded_year": 2012,
+      "country": "Spain",
+      "contact": {
+        "phone": "+34-91-577-0025",
+        "email": "reservas@medtravel.es",
+        "website": "www.medtravel.es",
+        "address": "Gran Vía 28, 28013 Madrid"
+      },
+      "specializations": [
+        "Mediterranean Cruises",
+        "Beach Resorts",
+        "Luxury Travel"
+      ],
+      "employee_count": 28,
+      "annual_bookings": 9800,
+      "average_booking_value_eur": 2400
+    },
+    {
+      "agent_id": "AG005",
+      "agent_name": "Nordic Explorer Tours",
+      "founded_year": 2006,
+      "country": "Sweden",
+      "contact": {
+        "phone": "+46-8-506-210-00",
+        "email": "info@nordicexplorer.se",
+        "website": "www.nordicexplorer.se",
+        "address": "Strandvägen 7A, 114 56 Stockholm"
+      },
+      "specializations": [
+        "Northern Europe",
+        "Fjord Cruises",
+        "Eco-Tourism"
+      ],
+      "employee_count": 21,
+      "annual_bookings": 7500,
+      "average_booking_value_eur": 1950
+    },
+    {
+      "agent_id": "AG006",
+      "agent_name": "Italian Holiday Specialists",
+      "founded_year": 2011,
+      "country": "Italy",
+      "contact": {
+        "phone": "+39-06-6994-0000",
+        "email": "prenotazioni@italyholidays.it",
+        "website": "www.italyholidays.it",
+        "address": "Via Veneto 72, 00187 Roma"
+      },
+      "specializations": [
+        "Italian Culture",
+        "Food & Wine Tours",
+        "Historical Sites"
+      ],
+      "employee_count": 26,
+      "annual_bookings": 8900,
+      "average_booking_value_eur": 2100
+    },
+    {
+      "agent_id": "AG007",
+      "agent_name": "Eastern Europe Travel Co",
+      "founded_year": 2009,
+      "country": "Czech Republic",
+      "contact": {
+        "phone": "+420-2-2157-5000",
+        "email": "info@easteuropetravel.cz",
+        "website": "www.easteuropetravel.cz",
+        "address": "Nerudova 39, 118 00 Praha 1"
+      },
+      "specializations": [
+        "Eastern European Tours",
+        "Prague & Surroundings",
+        "Budget Travel"
+      ],
+      "employee_count": 19,
+      "annual_bookings": 6800,
+      "average_booking_value_eur": 1450
+    },
+    {
+      "agent_id": "AG008",
+      "agent_name": "Exclusive Luxury Travel",
+      "founded_year": 2004,
+      "country": "France",
+      "contact": {
+        "phone": "+33-1-4261-8600",
+        "email": "contact@luxurytravel.fr",
+        "website": "www.luxurytravel.fr",
+        "address": "Avenue Montaigne 8, 75008 Paris"
+      },
+      "specializations": [
+        "Luxury Packages",
+        "VIP Travel",
+        "Private Jets"
+      ],
+      "employee_count": 42,
+      "annual_bookings": 5200,
+      "average_booking_value_eur": 5800
+    },
+    {
+      "agent_id": "AG009",
+      "agent_name": "Wellness & Spa Retreats",
+      "founded_year": 2013,
+      "country": "Austria",
+      "contact": {
+        "phone": "+43-1-512-1000",
+        "email": "bookings@wellnessretreat.at",
+        "website": "www.wellnessretreat.at",
+        "address": "Operngasse 20, 1040 Wien"
+      },
+      "specializations": [
+        "Health & Wellness",
+        "Spa Packages",
+        "Fitness Retreats"
+      ],
+      "employee_count": 23,
+      "annual_bookings": 5900,
+      "average_booking_value_eur": 2650
+    },
+    {
+      "agent_id": "AG010",
+      "agent_name": "Trans-Continental Travel",
+      "founded_year": 2007,
+      "country": "Netherlands",
+      "contact": {
+        "phone": "+31-20-530-2020",
+        "email": "info@transconttravel.nl",
+        "website": "www.transcontinental.nl",
+        "address": "Herengracht 540, 1017 CH Amsterdam"
+      },
+      "specializations": [
+        "International Flights",
+        "Round-The-World Tours",
+        "Corporate Travel"
+      ],
+      "employee_count": 35,
+      "annual_bookings": 11200,
+      "average_booking_value_eur": 3100
+    }
+  ]
+}

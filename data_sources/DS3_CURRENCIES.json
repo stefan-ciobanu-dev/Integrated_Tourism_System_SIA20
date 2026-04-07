@@ -1,0 +1,125 @@
+{
+  "base_currency": "EUR",
+  "extraction_date": "2025-01-15",
+  "rates": [
+    {
+      "currency_code": "USD",
+      "currency_name": "United States Dollar",
+      "exchange_rate": 1.0850,
+      "region": "North America",
+      "symbol": "$"
+    },
+    {
+      "currency_code": "GBP",
+      "currency_name": "British Pound Sterling",
+      "exchange_rate": 0.8450,
+      "region": "Europe",
+      "symbol": "£"
+    },
+    {
+      "currency_code": "JPY",
+      "currency_name": "Japanese Yen",
+      "exchange_rate": 163.4200,
+      "region": "Asia",
+      "symbol": "¥"
+    },
+    {
+      "currency_code": "CHF",
+      "currency_name": "Swiss Franc",
+      "exchange_rate": 0.9450,
+      "region": "Europe",
+      "symbol": "CHF"
+    },
+    {
+      "currency_code": "SEK",
+      "currency_name": "Swedish Krona",
+      "exchange_rate": 11.2300,
+      "region": "Europe",
+      "symbol": "kr"
+    },
+    {
+      "currency_code": "DKK",
+      "currency_name": "Danish Krone",
+      "exchange_rate": 7.4450,
+      "region": "Europe",
+      "symbol": "kr"
+    },
+    {
+      "currency_code": "NOK",
+      "currency_name": "Norwegian Krone",
+      "exchange_rate": 11.5850,
+      "region": "Europe",
+      "symbol": "kr"
+    },
+    {
+      "currency_code": "CZK",
+      "currency_name": "Czech Koruna",
+      "exchange_rate": 25.3450,
+      "region": "Europe",
+      "symbol": "Kč"
+    },
+    {
+      "currency_code": "HUF",
+      "currency_name": "Hungarian Forint",
+      "exchange_rate": 392.2100,
+      "region": "Europe",
+      "symbol": "Ft"
+    },
+    {
+      "currency_code": "PLN",
+      "currency_name": "Polish Zloty",
+      "exchange_rate": 4.3045,
+      "region": "Europe",
+      "symbol": "zł"
+    },
+    {
+      "currency_code": "RON",
+      "currency_name": "Romanian Leu",
+      "exchange_rate": 4.9750,
+      "region": "Europe",
+      "symbol": "Lei"
+    },
+    {
+      "currency_code": "INR",
+      "currency_name": "Indian Rupee",
+      "exchange_rate": 89.5600,
+      "region": "Asia",
+      "symbol": "₹"
+    },
+    {
+      "currency_code": "AUD",
+      "currency_name": "Australian Dollar",
+      "exchange_rate": 1.6950,
+      "region": "Oceania",
+      "symbol": "$"
+    },
+    {
+      "currency_code": "BRL",
+      "currency_name": "Brazilian Real",
+      "exchange_rate": 5.4200,
+      "region": "South America",
+      "symbol": "R$"
+    },
+    {
+      "currency_code": "MXN",
+      "currency_name": "Mexican Peso",
+      "exchange_rate": 18.9450,
+      "region": "North America",
+      "symbol": "$"
+    },
+    {
+      "currency_code": "HKD",
+      "currency_name": "Hong Kong Dollar",
+      "exchange_rate": 8.4150,
+      "region": "Asia",
+      "symbol": "$"
+    },
+    {
+      "currency_code": "SGD",
+      "currency_name": "Singapore Dollar",
+      "exchange_rate": 1.4350,
+      "region": "Asia",
+      "symbol": "$"
+    }
+  ]
+}

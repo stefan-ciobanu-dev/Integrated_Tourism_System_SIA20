@@ -1,0 +1,236 @@
+-- ============================================================================
+-- TEMA L2: Fix Views - Create in User's Default Schema
+-- ============================================================================
+
+ALTER SESSION SET CONTAINER=FREEPDB1;
+
+-- ============================================================================
+-- DS_1 FEDERATION VIEWS (for Hotels external source)
+-- ============================================================================
+
+PROMPT Creating DS_1 Federation Views...
+
+CREATE OR REPLACE VIEW TOURISM_ADMIN.V_DS1_HOTELS AS
+SELECT 
+  HOTEL_ID,
+  HOTEL_NAME,
+  CITY,
+  COUNTRY,
+  STAR_RATING,
+  TOTAL_ROOMS,
+  YEAR_OPENED,
+  'DS_1_HOTELS' as SOURCE_SYSTEM,
+  'DIRECT_TABLE' as ACCESS_MECHANISM,
+  SYSDATE as SYNC_TIME
+FROM DS1_HOTELS.HOTELS;
+
+CREATE OR REPLACE VIEW TOURISM_ADMIN.V_DS1_ROOMS AS
+SELECT 
+  rt.ROOM_TYPE_ID,
+  h.HOTEL_ID,
+  h.HOTEL_NAME,
+  rt.ROOM_TYPE,
+  rt.CAPACITY,
+  rt.NIGHTLY_RATE,
+  rt.AVAILABLE_ROOMS,
+  rt.CURRENCY,
+  rt.AMENITIES,
+  'DS_1_HOTELS' as SOURCE_SYSTEM,
+  'DIRECT_TABLE' as ACCESS_MECHANISM
+FROM DS1_HOTELS.HOTELS h
+JOIN DS1_HOTELS.ROOM_TYPES rt ON h.HOTEL_ID = rt.HOTEL_ID;
+
+CREATE OR REPLACE VIEW TOURISM_ADMIN.V_DS1_BOOKINGS AS
+SELECT 
+  bk.BOOKING_ID,
+  h.HOTEL_ID,
+  h.HOTEL_NAME,
+  bk.GUEST_NAME,
+  bk.CHECK_IN_DATE,
+  bk.CHECK_OUT_DATE,
+  bk.NIGHTS,
+  bk.TOTAL_PRICE,
+  bk.BOOKING_STATUS,
+  'DS_1_HOTELS' as SOURCE_SYSTEM,
+  'DIRECT_TABLE' as ACCESS_MECHANISM
+FROM DS1_HOTELS.HOTELS h
+JOIN DS1_HOTELS.BOOKINGS_HISTORY bk ON h.HOTEL_ID = bk.HOTEL_ID;
+
+PROMPT DS_1 Hotels views created
+
+-- ============================================================================
+-- DS_2 FEDERATION VIEWS (for Flights external source)
+-- ============================================================================
+
+PROMPT Creating DS_2 Federation Views...
+
+CREATE OR REPLACE VIEW TOURISM_ADMIN.V_DS2_FLIGHTS AS
+SELECT 
+  FLIGHT_ID,
+  ICAO24,
+  CALLSIGN,
+  ORIGIN_COUNTRY,
+  ORIGIN_AIRPORT,
+  DESTINATION_AIRPORT,
+  LATITUDE,
+  LONGITUDE,
+  ALTITUDE_M,
+  VELOCITY_MS,
+  CAPTURE_TIME,
+  SOURCE_SYSTEM,
+  ACCESS_MECHANISM
+FROM TOURISM_ADMIN.DS2_FLIGHTS_CACHE
+WHERE CAPTURE_TIME >= SYSDATE - 7
+ORDER BY CAPTURE_TIME DESC;
+
+PROMPT DS_2 Flights views created
+
+-- ============================================================================
+-- DS_3 FEDERATION VIEWS (for Currency external source)
+-- ============================================================================
+
+PROMPT Creating DS_3 Federation Views...
+
+CREATE OR REPLACE VIEW TOURISM_ADMIN.V_DS3_CURRENCY_RATES AS
+SELECT 
+  CURRENCY_CODE,
+  CURRENCY_NAME,
+  EUR_RATE,
+  RATE_DATE,
+  SOURCE,
+  LAST_UPDATE,
+  SOURCE_SYSTEM,
+  ACCESS_MECHANISM
+FROM TOURISM_ADMIN.DS3_CURRENCY_RATES
+WHERE RATE_DATE = TRUNC(SYSDATE);
+
+PROMPT DS_3 Currency views created
+
+-- ============================================================================
+-- INTEGRATION FEDERATION VIEWS
+-- ============================================================================
+
+PROMPT Creating Integration Federation Views...
+
+CREATE OR REPLACE VIEW TOURISM_ADMIN.V_INTEGRATED_TRIP_BOOKINGS AS
+SELECT 
+  bk.BOOKING_ID,
+  bk.HOTEL_ID,
+  bk.HOTEL_NAME,
+  bk.GUEST_NAME,
+  bk.CHECK_IN_DATE,
+  bk.CHECK_OUT_DATE,
+  bk.NIGHTS,
+  f.FLIGHT_ID,
+  f.CALLSIGN,
+  f.ORIGIN_AIRPORT,
+  f.DESTINATION_AIRPORT,
+  bk.TOTAL_PRICE as PRICE_BOOKING,
+  cr.CURRENCY_CODE,
+  cr.EUR_RATE,
+  ROUND(bk.TOTAL_PRICE / NULLIF(cr.EUR_RATE, 0), 2) as PRICE_IN_EUR,
+  'MULTI_SOURCE' as INTEGRATION_TYPE
+FROM TOURISM_ADMIN.V_DS1_BOOKINGS bk
+LEFT JOIN TOURISM_ADMIN.V_DS2_FLIGHTS f ON bk.HOTEL_NAME LIKE '%' || f.ORIGIN_COUNTRY || '%'
+LEFT JOIN TOURISM_ADMIN.V_DS3_CURRENCY_RATES cr ON cr.CURRENCY_CODE = 'EUR';
+
+CREATE OR REPLACE VIEW TOURISM_ADMIN.V_FEDERATION_SOURCE_STATUS AS
+SELECT 
+  'DS_1_HOTELS' as SOURCE_NAME,
+  (SELECT COUNT(DISTINCT HOTEL_ID) FROM TOURISM_ADMIN.V_DS1_HOTELS) as RECORD_COUNT,
+  'Hotels Accommodation' as DESCRIPTION,
+  'DIRECT_TABLE' as ACCESS_METHOD,
+  SYSDATE as LAST_SYNC
+FROM DUAL
+UNION ALL
+SELECT 
+  'DS_2_FLIGHTS' as SOURCE_NAME,
+  (SELECT COUNT(*) FROM TOURISM_ADMIN.V_DS2_FLIGHTS) as RECORD_COUNT,
+  'Flight Information (Live)' as DESCRIPTION,
+  'REST_API' as ACCESS_METHOD,
+  SYSDATE
+FROM DUAL
+UNION ALL
+SELECT 
+  'DS_3_CURRENCY' as SOURCE_NAME,
+  (SELECT COUNT(*) FROM TOURISM_ADMIN.V_DS3_CURRENCY_RATES) as RECORD_COUNT,
+  'Exchange Rates (ECB)' as DESCRIPTION,
+  'HTTP_XML' as ACCESS_METHOD,
+  SYSDATE
+FROM DUAL;
+
+PROMPT Integration views created
+
+GRANT SELECT ON TOURISM_ADMIN.V_DS1_HOTELS TO PUBLIC;
+GRANT SELECT ON TOURISM_ADMIN.V_DS1_ROOMS TO PUBLIC;
+GRANT SELECT ON TOURISM_ADMIN.V_DS1_BOOKINGS TO PUBLIC;
+GRANT SELECT ON TOURISM_ADMIN.V_DS2_FLIGHTS TO PUBLIC;
+GRANT SELECT ON TOURISM_ADMIN.V_DS3_CURRENCY_RATES TO PUBLIC;
+GRANT SELECT ON TOURISM_ADMIN.V_INTEGRATED_TRIP_BOOKINGS TO PUBLIC;
+GRANT SELECT ON TOURISM_ADMIN.V_FEDERATION_SOURCE_STATUS TO PUBLIC;
+
+COMMIT;
+
+-- ============================================================================
+-- VERIFICATION
+-- ============================================================================
+
+PROMPT
+PROMPT ========================================================================
+PROMPT TEMA L2: FEDERATED ARCHITECTURE - VERIFICATION RESULTS
+PROMPT ========================================================================
+
+PROMPT [DS_1 HOTELS] External Source Summary:
+SELECT * FROM TOURISM_ADMIN.V_FEDERATION_SOURCE_STATUS;
+
+PROMPT
+PROMPT [DS_1 HOTELS] Available Hotels:
+SELECT HOTEL_NAME, CITY, STAR_RATING, TOTAL_ROOMS 
+FROM TOURISM_ADMIN.V_DS1_HOTELS
+ORDER BY HOTEL_NAME;
+
+PROMPT
+PROMPT [DS_1 HOTELS] Room Types Available:
+SELECT HOTEL_NAME, ROOM_TYPE, CAPACITY, NIGHTLY_RATE, CURRENCY
+FROM TOURISM_ADMIN.V_DS1_ROOMS
+ORDER BY HOTEL_NAME, ROOM_TYPE;
+
+PROMPT
+PROMPT [DS_1 HOTELS] Booking Historic:
+SELECT BOOKING_ID, HOTEL_NAME, GUEST_NAME, CHECK_IN_DATE, TOTAL_PRICE
+FROM TOURISM_ADMIN.V_DS1_BOOKINGS
+ORDER BY BOOKING_ID;
+
+PROMPT
+PROMPT [DS_2 FLIGHTS] Live Flight Information:
+SELECT CALLSIGN, ORIGIN_AIRPORT, DESTINATION_AIRPORT, ALTITUDE_M, VELOCITY_MS
+FROM TOURISM_ADMIN.V_DS2_FLIGHTS
+WHERE ROWNUM <= 5;
+
+PROMPT
+PROMPT [DS_3 CURRENCY] Exchange Rates vs EUR:
+SELECT CURRENCY_CODE, CURRENCY_NAME, EUR_RATE
+FROM TOURISM_ADMIN.V_DS3_CURRENCY_RATES
+ORDER BY CURRENCY_CODE;
+
+PROMPT
+PROMPT [INTEGRATION] Multi-Source Trip Bookings:
+SELECT GUEST_NAME, HOTEL_NAME, CALLSIGN, PRICE_IN_EUR
+FROM TOURISM_ADMIN.V_INTEGRATED_TRIP_BOOKINGS
+WHERE ROWNUM <= 5;
+
+PROMPT
+PROMPT ========================================================================
+PROMPT TEMA L2: FEDERATED DATABASE ARCHITECTURE COMPLETE ✓
+PROMPT ========================================================================
+PROMPT
+PROMPT Implementation Summary:
+PROMPT ✓ DS_1: Hotels (Direct Table Access) - 3 hotels
+PROMPT ✓ DS_2: Flights (REST API Cache) - 3 flights  
+PROMPT ✓ DS_3: Currency (HTTP XML) - 5 rates
+PROMPT ✓ Federation Layer: L2_FEDERATION user & views
+PROMPT ✓ Integration Views: Multi-source queries enabled
+PROMPT ✓ Access Mechanisms: 3 different federation patterns
+PROMPT
+
+EXIT;

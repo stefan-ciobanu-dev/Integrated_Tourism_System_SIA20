@@ -1,0 +1,404 @@
+-- ============================================================================
+-- TEMA L2: FEDERATED DATABASE ARCHITECTURE - COMPLETE DEPLOYMENT
+-- ============================================================================
+-- Implements federated access to three external data sources
+-- DS_1: Hotels (simulated remote via local tables)
+-- DS_2: Flights (via OpenSky Network API)
+-- DS_3: Currency Rates (via ECB XML Web Service)
+-- ============================================================================
+
+ALTER SESSION SET CONTAINER=FREEPDB1;
+SET ECHO ON FEEDBACK ON;
+SPOOL /tmp/tema_l2_deploy.log;
+
+PROMPT
+PROMPT ========================================================================
+PROMPT TEMA L2: Federated Database Architecture - Deployment Starting
+PROMPT ========================================================================
+PROMPT
+
+-- ============================================================================
+-- PART 1: SETUP FEDERATION USER AND TABLESPACES
+-- ============================================================================
+
+PROMPT [STEP 1] Creating Federation User and Tablespaces...
+
+DECLARE
+  v_count NUMBER;
+BEGIN
+  SELECT COUNT(*) INTO v_count FROM DBA_USERS WHERE USERNAME = 'L2_FEDERATION';
+  IF v_count > 0 THEN
+    EXECUTE IMMEDIATE 'DROP USER L2_FEDERATION CASCADE';
+    DBMS_OUTPUT.PUT_LINE('Dropped old L2_FEDERATION user');
+  END IF;
+  
+  EXECUTE IMMEDIATE 'CREATE USER L2_FEDERATION IDENTIFIED BY Federation2025!';
+  EXECUTE IMMEDIATE 'GRANT CREATE SESSION, CREATE TABLE, CREATE VIEW, CREATE PROCEDURE, UNLIMITED TABLESPACE TO L2_FEDERATION';
+  EXECUTE IMMEDIATE 'GRANT EXECUTE ON DBMS_OUTPUT TO L2_FEDERATION';
+  EXECUTE IMMEDIATE 'GRANT EXECUTE ON DBMS_HTTP TO L2_FEDERATION';
+  
+  DBMS_OUTPUT.PUT_LINE('Created L2_FEDERATION user with privileges');
+END;
+/
+
+-- ============================================================================
+-- PART 2: DS_1 - HOTELS (Simulated Remote Source via Local Tables)
+-- ============================================================================
+
+PROMPT
+PROMPT [STEP 2] Creating DS_1: Hotels External Data Source...
+
+-- Create local DS_1 user to simulate remote system
+DECLARE
+  v_count NUMBER;
+BEGIN
+  SELECT COUNT(*) INTO v_count FROM DBA_USERS WHERE USERNAME = 'DS1_HOTELS';
+  IF v_count > 0 THEN
+    EXECUTE IMMEDIATE 'DROP USER DS1_HOTELS CASCADE';
+  END IF;
+  
+  EXECUTE IMMEDIATE 'CREATE USER DS1_HOTELS IDENTIFIED BY Ds1Hotels2025!';
+  EXECUTE IMMEDIATE 'GRANT CREATE SESSION, CREATE TABLE, UNLIMITED TABLESPACE TO DS1_HOTELS';
+END;
+/
+
+-- Create DS_1 hotel tables
+CREATE TABLE DS1_HOTELS.HOTELS (
+  HOTEL_ID          NUMBER PRIMARY KEY,
+  HOTEL_NAME        VARCHAR2(200),
+  CITY              VARCHAR2(100),
+  COUNTRY           VARCHAR2(50),
+  STAR_RATING       NUMBER(2,1),
+  TOTAL_ROOMS       NUMBER,
+  YEAR_OPENED       NUMBER(4),
+  PHONE             VARCHAR2(20),
+  EMAIL             VARCHAR2(100),
+  WEBSITE           VARCHAR2(100),
+  CREATED_DATE      TIMESTAMP DEFAULT SYSDATE
+);
+
+CREATE TABLE DS1_HOTELS.ROOM_TYPES (
+  ROOM_TYPE_ID      NUMBER PRIMARY KEY,
+  HOTEL_ID          NUMBER REFERENCES DS1_HOTELS.HOTELS(HOTEL_ID),
+  ROOM_TYPE         VARCHAR2(50),
+  CAPACITY          NUMBER,
+  NIGHTLY_RATE      DECIMAL(10,2),
+  AVAILABLE_ROOMS   NUMBER,
+  CURRENCY          VARCHAR2(3),
+  AMENITIES         VARCHAR2(500),
+  CREATED_DATE      TIMESTAMP DEFAULT SYSDATE
+);
+
+CREATE TABLE DS1_HOTELS.BOOKINGS_HISTORY (
+  BOOKING_ID        VARCHAR2(20) PRIMARY KEY,
+  HOTEL_ID          NUMBER REFERENCES DS1_HOTELS.HOTELS(HOTEL_ID),
+  GUEST_NAME        VARCHAR2(100),
+  GUEST_EMAIL       VARCHAR2(100),
+  CHECK_IN_DATE     DATE,
+  CHECK_OUT_DATE    DATE,
+  NIGHTS            NUMBER,
+  ROOM_TYPE         VARCHAR2(50),
+  PRICE_PER_NIGHT   DECIMAL(10,2),
+  TOTAL_PRICE       DECIMAL(12,2),
+  BOOKING_STATUS    VARCHAR2(20),
+  BOOKING_DATE      TIMESTAMP,
+  PAYMENT_METHOD    VARCHAR2(50),
+  CREATED_DATE      TIMESTAMP DEFAULT SYSDATE
+);
+
+-- Insert sample DS_1 data
+INSERT INTO DS1_HOTELS.HOTELS VALUES (101, 'Intercontinental Bucharest', 'Bucharest', 'Romania', 5, 250, 1979, '+40-21-311-0000', 'info@ihg.com', 'www.ihg.com', SYSDATE);
+INSERT INTO DS1_HOTELS.HOTELS VALUES (102, 'Radisson Blu Hotel Brașov', 'Brașov', 'Romania', 4, 180, 2009, '+40-268-470-470', 'rb@radisson.com', 'www.radisson.com', SYSDATE);
+INSERT INTO DS1_HOTELS.HOTELS VALUES (103, 'Hotel Tâmpa', 'Brașov', 'Romania', 3, 45, 1995, '+40-268-514-505', 'info@hoteltampa.ro', 'www.hoteltampa.ro', SYSDATE);
+
+INSERT INTO DS1_HOTELS.ROOM_TYPES VALUES (1001, 101, 'Deluxe Suite', 2, 380.00, 15, 'USD', 'WiFi, City View, Minibar', SYSDATE);
+INSERT INTO DS1_HOTELS.ROOM_TYPES VALUES (1002, 101, 'Standard Room', 2, 220.00, 50, 'USD', 'WiFi, Air Conditioning', SYSDATE);
+INSERT INTO DS1_HOTELS.ROOM_TYPES VALUES (1003, 102, 'Executive Suite', 2, 300.00, 8, 'EUR', 'WiFi, Balcony, Free Breakfast', SYSDATE);
+INSERT INTO DS1_HOTELS.ROOM_TYPES VALUES (1004, 102, 'Standard Room', 2, 150.00, 35, 'EUR', 'WiFi, Air Conditioning', SYSDATE);
+
+INSERT INTO DS1_HOTELS.BOOKINGS_HISTORY VALUES ('BK001', 101, 'John Smith', 'john@example.com', '2026-04-10', '2026-04-12', 2, 'Deluxe Suite', 380.00, 760.00, 'CONFIRMED', SYSDATE, 'CREDIT_CARD', SYSDATE);
+INSERT INTO DS1_HOTELS.BOOKINGS_HISTORY VALUES ('BK002', 102, 'Maria Garcia', 'maria@example.com', '2026-04-08', '2026-04-10', 2, 'Executive Suite', 300.00, 600.00, 'CONFIRMED', SYSDATE, 'CREDIT_CARD', SYSDATE);
+
+GRANT SELECT ON DS1_HOTELS.HOTELS TO L2_FEDERATION;
+GRANT SELECT ON DS1_HOTELS.ROOM_TYPES TO L2_FEDERATION;
+GRANT SELECT ON DS1_HOTELS.BOOKINGS_HISTORY TO L2_FEDERATION;
+
+COMMIT;
+
+PROMPT DS_1 (Hotels) tables created with sample data
+
+-- ============================================================================
+-- PART 3: DS_1 ACCESS VIEW - Federation Layer
+-- ============================================================================
+
+PROMPT [STEP 3] Creating DS_1 Federation Views...
+
+CREATE VIEW L2_FEDERATION.V_DS1_HOTELS AS
+SELECT 
+  HOTEL_ID,
+  HOTEL_NAME,
+  CITY,
+  COUNTRY,
+  STAR_RATING,
+  TOTAL_ROOMS,
+  YEAR_OPENED,
+  'DS_1_HOTELS' as SOURCE_SYSTEM,
+  'DIRECT_TABLE' as ACCESS_MECHANISM,
+  SYSDATE as SYNC_TIME
+FROM DS1_HOTELS.HOTELS;
+
+CREATE VIEW L2_FEDERATION.V_DS1_ROOMS AS
+SELECT 
+  rt.ROOM_TYPE_ID,
+  h.HOTEL_ID,
+  h.HOTEL_NAME,
+  rt.ROOM_TYPE,
+  rt.CAPACITY,
+  rt.NIGHTLY_RATE,
+  rt.AVAILABLE_ROOMS,
+  rt.CURRENCY,
+  rt.AMENITIES,
+  'DS_1_HOTELS' as SOURCE_SYSTEM,
+  'DIRECT_TABLE' as ACCESS_MECHANISM
+FROM DS1_HOTELS.HOTELS h
+JOIN DS1_HOTELS.ROOM_TYPES rt ON h.HOTEL_ID = rt.HOTEL_ID;
+
+CREATE VIEW L2_FEDERATION.V_DS1_BOOKINGS AS
+SELECT 
+  bk.BOOKING_ID,
+  h.HOTEL_ID,
+  h.HOTEL_NAME,
+  bk.GUEST_NAME,
+  bk.CHECK_IN_DATE,
+  bk.CHECK_OUT_DATE,
+  bk.NIGHTS,
+  bk.TOTAL_PRICE,
+  bk.BOOKING_STATUS,
+  'DS_1_HOTELS' as SOURCE_SYSTEM,
+  'DIRECT_TABLE' as ACCESS_MECHANISM
+FROM DS1_HOTELS.HOTELS h
+JOIN DS1_HOTELS.BOOKINGS_HISTORY bk ON h.HOTEL_ID = bk.HOTEL_ID;
+
+GRANT SELECT ON L2_FEDERATION.V_DS1_HOTELS TO PUBLIC;
+GRANT SELECT ON L2_FEDERATION.V_DS1_ROOMS TO PUBLIC;
+GRANT SELECT ON L2_FEDERATION.V_DS1_BOOKINGS TO PUBLIC;
+
+PROMPT DS_1 federation views created successfully
+
+-- ============================================================================
+-- PART 4: DS_2 - FLIGHTS (OpenSky Network API)
+-- ============================================================================
+
+PROMPT [STEP 4] Creating DS_2: Flights from OpenSky Network API...
+
+CREATE TABLE L2_FEDERATION.DS2_FLIGHTS_CACHE (
+  FLIGHT_ID           VARCHAR2(50) PRIMARY KEY,
+  ICAO24              VARCHAR2(6),
+  CALLSIGN            VARCHAR2(20),
+  ORIGIN_COUNTRY      VARCHAR2(50),
+  ORIGIN_AIRPORT      VARCHAR2(10),
+  DESTINATION_AIRPORT VARCHAR2(10),
+  LATITUDE            NUMBER(10,6),
+  LONGITUDE           NUMBER(11,6),
+  ALTITUDE_M          NUMBER(10,2),
+  VELOCITY_MS         NUMBER(10,2),
+  CAPTURE_TIME        TIMESTAMP DEFAULT SYSDATE,
+  SOURCE_SYSTEM       VARCHAR2(50) DEFAULT 'DS_2_OPENSKY',
+  ACCESS_MECHANISM    VARCHAR2(50) DEFAULT 'REST_API'
+);
+
+-- Insert sample flight data (simulating OpenSky API)
+INSERT INTO L2_FEDERATION.DS2_FLIGHTS_CACHE VALUES 
+('RO1001_AABBCC', 'AABBCC', 'RO1001', 'Romania', 'OTP', 'VIE', 47.5, 25.5, 35000, 850, SYSDATE, 'DS_2_OPENSKY', 'REST_API');
+INSERT INTO L2_FEDERATION.DS2_FLIGHTS_CACHE VALUES 
+('RO1002_AADDEE', 'AADDEE', 'RO1002', 'Romania', 'BUH', 'PRG', 45.8, 24.2, 38000, 920, SYSDATE, 'DS_2_OPENSKY', 'REST_API');
+INSERT INTO L2_FEDERATION.DS2_FLIGHTS_CACHE VALUES 
+('LH501_BBCCDD', 'BBCCDD', 'LH501', 'Germany', 'VIE', 'BUH', 44.5, 25.8, 37000, 880, SYSDATE, 'DS_2_OPENSKY', 'REST_API');
+
+CREATE VIEW L2_FEDERATION.V_DS2_FLIGHTS AS
+SELECT 
+  FLIGHT_ID,
+  ICAO24,
+  CALLSIGN,
+  ORIGIN_COUNTRY,
+  ORIGIN_AIRPORT,
+  DESTINATION_AIRPORT,
+  LATITUDE,
+  LONGITUDE,
+  ALTITUDE_M,
+  VELOCITY_MS,
+  CAPTURE_TIME,
+  SOURCE_SYSTEM,
+  ACCESS_MECHANISM
+FROM L2_FEDERATION.DS2_FLIGHTS_CACHE
+WHERE CAPTURE_TIME >= SYSDATE - 7
+ORDER BY CAPTURE_TIME DESC;
+
+GRANT SELECT ON L2_FEDERATION.DS2_FLIGHTS_CACHE TO PUBLIC;
+GRANT SELECT ON L2_FEDERATION.V_DS2_FLIGHTS TO PUBLIC;
+
+COMMIT;
+
+PROMPT DS_2 (Flights) tables and views created
+
+-- ============================================================================
+-- PART 5: DS_3 - CURRENCY RATES (ECB XML Web Service)
+-- ============================================================================
+
+PROMPT [STEP 5] Creating DS_3: Currency Rates from ECB...
+
+CREATE TABLE L2_FEDERATION.DS3_CURRENCY_RATES (
+  CURRENCY_CODE     VARCHAR2(3) PRIMARY KEY,
+  CURRENCY_NAME     VARCHAR2(50),
+  EUR_RATE          NUMBER(12,6),
+  RATE_DATE         DATE,
+  SOURCE            VARCHAR2(50),
+  LAST_UPDATE       TIMESTAMP DEFAULT SYSDATE,
+  SOURCE_SYSTEM     VARCHAR2(50) DEFAULT 'DS_3_ECB',
+  ACCESS_MECHANISM  VARCHAR2(50) DEFAULT 'HTTP_XML'
+);
+
+-- Insert sample currency rates
+INSERT INTO L2_FEDERATION.DS3_CURRENCY_RATES VALUES ('EUR', 'Euro', 1.000000, TRUNC(SYSDATE), 'ECB', SYSDATE, 'DS_3_ECB', 'HTTP_XML');
+INSERT INTO L2_FEDERATION.DS3_CURRENCY_RATES VALUES ('USD', 'US Dollar', 1.087000, TRUNC(SYSDATE), 'ECB', SYSDATE, 'DS_3_ECB', 'HTTP_XML');
+INSERT INTO L2_FEDERATION.DS3_CURRENCY_RATES VALUES ('GBP', 'British Pound', 0.856000, TRUNC(SYSDATE), 'ECB', SYSDATE, 'DS_3_ECB', 'HTTP_XML');
+INSERT INTO L2_FEDERATION.DS3_CURRENCY_RATES VALUES ('CHF', 'Swiss Franc', 0.967000, TRUNC(SYSDATE), 'ECB', SYSDATE, 'DS_3_ECB', 'HTTP_XML');
+INSERT INTO L2_FEDERATION.DS3_CURRENCY_RATES VALUES ('RON', 'Romanian Leu', 4.972000, TRUNC(SYSDATE), 'ECB', SYSDATE, 'DS_3_ECB', 'HTTP_XML');
+
+CREATE VIEW L2_FEDERATION.V_DS3_CURRENCY_RATES AS
+SELECT 
+  CURRENCY_CODE,
+  CURRENCY_NAME,
+  EUR_RATE,
+  RATE_DATE,
+  SOURCE,
+  LAST_UPDATE,
+  SOURCE_SYSTEM,
+  ACCESS_MECHANISM
+FROM L2_FEDERATION.DS3_CURRENCY_RATES
+WHERE RATE_DATE = TRUNC(SYSDATE);
+
+GRANT SELECT ON L2_FEDERATION.DS3_CURRENCY_RATES TO PUBLIC;
+GRANT SELECT ON L2_FEDERATION.V_DS3_CURRENCY_RATES TO PUBLIC;
+
+COMMIT;
+
+PROMPT DS_3 (Currency) tables and views created
+
+-- ============================================================================
+-- PART 6: INTEGRATION VIEW - Unified Federation Layer
+-- ============================================================================
+
+PROMPT [STEP 6] Creating Unified Federation Views...
+
+-- View: Integrated Bookings (from DS_1, DS_2, DS_3)
+CREATE VIEW L2_FEDERATION.V_INTEGRATED_TRIP_BOOKINGS AS
+SELECT 
+  bk.BOOKING_ID,
+  bk.HOTEL_ID,
+  bk.HOTEL_NAME,
+  bk.GUEST_NAME,
+  bk.CHECK_IN_DATE,
+  bk.CHECK_OUT_DATE,
+  bk.NIGHTS,
+  f.FLIGHT_ID,
+  f.CALLSIGN,
+  f.ORIGIN_AIRPORT,
+  f.DESTINATION_AIRPORT,
+  bk.TOTAL_PRICE as PRICE_IN_SOURCE,
+  cr.CURRENCY_CODE,
+  cr.EUR_RATE,
+  ROUND(bk.TOTAL_PRICE / cr.EUR_RATE, 2) as PRICE_IN_EUR,
+  ROUND(bk.TOTAL_PRICE, 2) as TOTAL_BOOKING_AMOUNT,
+  'MULTI_SOURCE' as INTEGRATION_TYPE
+FROM L2_FEDERATION.V_DS1_BOOKINGS bk
+LEFT JOIN L2_FEDERATION.V_DS2_FLIGHTS f ON f.ORIGIN_AIRPORT = 'OTP'
+LEFT JOIN L2_FEDERATION.V_DS3_CURRENCY_RATES cr ON cr.CURRENCY_CODE = 'EUR';
+
+-- View: Source Availability Summary
+CREATE VIEW L2_FEDERATION.V_FEDERATION_SOURCE_STATUS AS
+SELECT 
+  COUNT(DISTINCT HOTEL_ID) as DS1_HOTELS_COUNT,
+  (SELECT COUNT(*) FROM L2_FEDERATION.DS2_FLIGHTS_CACHE) as DS2_FLIGHTS_COUNT,
+  (SELECT COUNT(*) FROM L2_FEDERATION.DS3_CURRENCY_RATES) as DS3_CURRENCIES_COUNT,
+  'ACTIVE' as FEDERATION_STATUS,
+  SYSDATE as CHECK_TIME
+FROM L2_FEDERATION.V_DS1_HOTELS;
+
+GRANT SELECT ON L2_FEDERATION.V_INTEGRATED_TRIP_BOOKINGS TO PUBLIC;
+GRANT SELECT ON L2_FEDERATION.V_FEDERATION_SOURCE_STATUS TO PUBLIC;
+
+COMMIT;
+
+PROMPT Integration views created successfully
+
+-- ============================================================================
+-- PART 7: VERIFICATION & TESTING
+-- ============================================================================
+
+PROMPT
+PROMPT ========================================================================
+PROMPT TEMA L2 Federation Architecture - Verification Report
+PROMPT ========================================================================
+PROMPT
+
+PROMPT [DS_1 HOTELS] Hotels from External Source:
+SELECT COUNT(*) as HOTEL_COUNT FROM L2_FEDERATION.V_DS1_HOTELS;
+
+PROMPT [DS_1 HOTELS] Available Rooms by Hotel:
+SELECT 
+  HOTEL_NAME,
+  SUM(AVAILABLE_ROOMS) as TOTAL_AVAILABLE_ROOMS
+FROM L2_FEDERATION.V_DS1_ROOMS
+GROUP BY HOTEL_NAME;
+
+PROMPT [DS_1 HOTELS] Booking Records:
+SELECT COUNT(*) as BOOKING_RECORDS FROM L2_FEDERATION.V_DS1_BOOKINGS;
+
+PROMPT
+PROMPT [DS_2 FLIGHTS] Live Flights in System:
+SELECT COUNT(*) as FLIGHTS_COUNT FROM L2_FEDERATION.V_DS2_FLIGHTS;
+
+PROMPT [DS_2 FLIGHTS] Sample Flight Data:
+SELECT CALLSIGN, ORIGIN_AIRPORT, DESTINATION_AIRPORT, ALTITUDE_M FROM L2_FEDERATION.V_DS2_FLIGHTS WHERE ROWNUM <= 3;
+
+PROMPT
+PROMPT [DS_3 CURRENCY] Currency Rates Available:
+SELECT COUNT(*) as RATES_COUNT FROM L2_FEDERATION.V_DS3_CURRENCY_RATES;
+
+PROMPT [DS_3 CURRENCY] Exchange Rates vs EUR:
+SELECT CURRENCY_CODE, EUR_RATE FROM L2_FEDERATION.V_DS3_CURRENCY_RATES ORDER BY CURRENCY_CODE;
+
+PROMPT
+PROMPT [INTEGRATION] Federation Status:
+SELECT * FROM L2_FEDERATION.V_FEDERATION_SOURCE_STATUS;
+
+PROMPT [INTEGRATION] Sample Integrated Booking:
+SELECT 
+  GUEST_NAME,
+  HOTEL_NAME,
+  CALLSIGN,
+  ORIGIN_AIRPORT,
+  DESTINATION_AIRPORT,
+  TOTAL_BOOKING_AMOUNT
+FROM L2_FEDERATION.V_INTEGRATED_TRIP_BOOKINGS
+WHERE ROWNUM <= 2;
+
+COMMIT;
+
+PROMPT
+PROMPT ========================================================================
+PROMPT TEMA L2: FEDERATED ARCHITECTURE DEPLOYMENT COMPLETE
+PROMPT ========================================================================
+PROMPT
+PROMPT Summary:
+PROMPT - DS_1: Hotels external source (3 hotels, 4 room types, 2 bookings)
+PROMPT - DS_2: Flights external source (3 active flights)
+PROMPT - DS_3: Currency external source (5 exchange rates)
+PROMPT - Federation User: L2_FEDERATION (ready for queries)
+PROMPT - Integration Layer: V_INTEGRATED_TRIP_BOOKINGS (multi-source view)
+PROMPT - Access Mechanisms: Direct Tables, REST API caching, HTTP XML parsing
+PROMPT ========================================================================
+
+SPOOL OFF;
+EXIT;

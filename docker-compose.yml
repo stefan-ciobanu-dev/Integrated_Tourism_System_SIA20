@@ -1,0 +1,207 @@
+version: '3.8'
+
+# ===============q=============================================================
+# Docker Compose Configuration for Tourism Analysis Platform
+# Platforma de analiza a turismului - University Assignment
+# 
+# Services:
+#   - Oracle Database 23ai Free Edition (Port 1521, 5500)
+#   - Oracle REST Data Services - ORDS (Port 8181)
+#
+# Environment:
+#   - Admin password: TourismDB2025!
+#   - App user: TOURISM_ADMIN / Tourism2025
+#
+# ============================================================================
+
+services:
+  # =========================================================================
+  # Oracle Database Free Edition (Official Oracle Registry)
+  # =========================================================================
+  oracle-db:
+    image: container-registry.oracle.com/database/free:latest
+    container_name: tourism-oracle-db
+    hostname: oracle-db
+    
+    # Network configuration
+    ports:
+      - "1521:1521"      # SQL*Net listener - for SQL*Plus, JDBC, etc.
+      - "5500:5500"      # Enterprise Manager Express (HTTPS)
+    
+    # Environment variables for Oracle Database initialization
+    environment:
+      # System credentials
+      ORACLE_SID: FREEPDB1
+      ORACLE_PDB: FREEPDB1
+      ORACLE_PWD: TourismDB2025!      # SYS and SYSTEM password
+      
+      # Database character set and language
+      ORACLE_CHARACTERSET: AL32UTF8
+      NLS_LANG: AMERICAN_AMERICA.AL32UTF8
+      
+      # Memory allocation
+      PROCESSES: 300
+      DB_RECOVERY_FILE_DEST_SIZE: 20G
+    
+    # Volume mappings for persistent data
+    volumes:
+      # Oracle database files - persists across container restarts
+      - oracle_data_volume:/opt/oracle/oradata
+      
+      # Initialization SQL scripts - executed on container startup
+      - ./database/init_db.sql:/docker-entrypoint-initdb.d/01_init_db.sql
+      
+      # Logs volume for troubleshooting and diagnostics
+      - oracle_logs_volume:/opt/oracle/diag
+      
+      # Export/backup directory
+      - ./database/exports:/exports
+    
+    # Health check configuration
+    # Periodically verifies that the database is responsive
+    healthcheck:
+      test: ["CMD", "sqlplus", "-S", "system/TourismDB2025!@FREEPDB1", "as", "sysdba", "SELECT 1 FROM dual;"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 120s      # Give DB extra time to start on first run
+    
+    # Resource constraints
+    mem_limit: 6g
+    cpus: '2'
+    
+    # Restart policy - automatically restart on failure
+    restart: unless-stopped
+    
+    # Use named network for inter-container communication
+    networks:
+      - tourism-network
+    
+    # Security options
+    cap_add:
+      - SYS_NICE
+      - SYS_RESOURCE
+  
+  # =========================================================================
+  # ORDS (Oracle REST Data Services) - RESTful API Gateway (Official Oracle Registry)
+  # =========================================================================
+  ords:
+    image: container-registry.oracle.com/database/ords:latest
+    container_name: tourism-ords
+    hostname: ords
+    
+    # Service dependencies - wait for database to be healthy
+    depends_on:
+      oracle-db:
+        condition: service_healthy
+    
+    # Port mapping for ORDS HTTP service
+    ports:
+      - "8181:8181"      # ORDS HTTP service - main REST endpoint
+    
+    # Environment variables for ORDS configuration
+    environment:
+      # Database connection settings
+      DB_HOSTNAME: oracle-db
+      DB_PORT: 1521
+      DB_SERVICE_NAME: FREEPDB1
+      DB_SYS_PASSWORD: TourismDB2025!
+      DB_ADMIN_USER: system
+      
+      # ORDS configuration
+      ORDS_STANDALONE_MODE: 'true'
+      ORDS_PUBLIC_USER: ORDS_PUBLIC_USER
+      
+      # SQL Gateway mode - allows direct SQL execution via REST
+      ORDS_SQL_GATEWAY_MODE: 'true'
+      
+      # PL/SQL Gateway mode - allows PL/SQL package invocation via REST
+      ORDS_PLSQL_GATEWAY_MODE: 'true'
+      
+      # ORDS admin credentials
+      ORDS_ADMIN_USER: admin
+      ORDS_ADMIN_PASSWORD: Ords2025!
+      
+      # Security and performance settings
+      ORDS_CONFIDENTIAL_EXCHANGES: 'true'
+      JAVA_OPTS: "-Xms512m -Xmx1024m"
+    
+    # Volume mounts
+    volumes:
+      # ORDS configuration directory - survives container restarts
+      - ords_config_volume:/opt/ords/config
+      
+      # ORDS logs - useful for debugging REST service issues
+      - ords_logs_volume:/opt/ords/logs
+    
+    # Health check for ORDS service
+    # Verifies that the REST service is responding to requests
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8181/ords/"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    
+    # Resource constraints
+    mem_limit: 2g
+    cpus: '1'
+    
+    # Restart policy
+    restart: unless-stopped
+    
+    # Use named network
+    networks:
+      - tourism-network
+
+# ============================================================================
+# Named Volumes - Data Persistence
+# ============================================================================
+# These volumes ensure that database and ORDS data persist across container
+# restarts and are not lost when containers are stopped or removed.
+#
+volumes:
+  # Oracle Database data files
+  oracle_data_volume:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./database/data
+  
+  # Oracle diagnostic logs and trace files
+  oracle_logs_volume:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./database/logs
+  
+  # ORDS configuration files
+  ords_config_volume:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./ords/config
+  
+  # ORDS logs
+  ords_logs_volume:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./ords/logs
+
+# ============================================================================
+# Custom Network - Service Communication
+# ============================================================================
+# A dedicated bridge network allows Oracle containers to communicate using
+# their service names (oracle-db, ords) as hostnames.
+#
+networks:
+  tourism-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.25.0.0/16

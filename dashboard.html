@@ -1,0 +1,322 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tourism Analytics Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    header {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .status {
+      color: #666;
+      font-size: 14px;
+    }
+    .status.online { color: #10b981; font-weight: bold; }
+    .status.offline { color: #ef4444; font-weight: bold; }
+    
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    .kpi-card {
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .kpi-card h3 {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .kpi-value {
+      color: #667eea;
+      font-size: 36px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .kpi-unit {
+      color: #999;
+      font-size: 12px;
+    }
+    
+    .chart-container {
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    .chart-container h2 {
+      color: #333;
+      margin-bottom: 20px;
+      font-size: 18px;
+    }
+    
+    .data-table {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th {
+      background: #f8f9fa;
+      padding: 15px;
+      text-align: left;
+      color: #333;
+      font-weight: 600;
+      border-bottom: 2px solid #667eea;
+    }
+    td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #eee;
+    }
+    tr:hover { background: #f8f9fa; }
+    
+    .error {
+      background: #fee;
+      color: #c33;
+      padding: 15px;
+      border-radius: 5px;
+      margin: 10px 0;
+      border-left: 4px solid #c33;
+    }
+    .success {
+      background: #efe;
+      color: #3c3;
+      padding: 15px;
+      border-radius: 5px;
+      margin: 10px 0;
+      border-left: 4px solid #3c3;
+    }
+    .loading {
+      text-align: center;
+      padding: 20px;
+      color: #667eea;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🎫 Tourism Analytics Dashboard</h1>
+      <p class="status">
+        Database: <span class="status online" id="db-status">CHECKING...</span> |
+        API: <span class="status online" id="api-status">CHECKING...</span>
+      </p>
+    </header>
+
+    <!-- KPI Cards -->
+    <div class="dashboard-grid">
+      <div class="kpi-card">
+        <h3>📊 Total Bookings</h3>
+        <div class="kpi-value" id="kpi-bookings">-</div>
+        <div class="kpi-unit">records</div>
+      </div>
+      <div class="kpi-card">
+        <h3>💰 Total Revenue</h3>
+        <div class="kpi-value" id="kpi-revenue">-</div>
+        <div class="kpi-unit">EUR</div>
+      </div>
+      <div class="kpi-card">
+        <h3>🏨 Active Hotels</h3>
+        <div class="kpi-value" id="kpi-hotels">-</div>
+        <div class="kpi-unit">hotels</div>
+      </div>
+      <div class="kpi-card">
+        <h3>📈 Avg Booking Value</h3>
+        <div class="kpi-value" id="kpi-avg">-</div>
+        <div class="kpi-unit">EUR</div>
+      </div>
+    </div>
+
+    <!-- Revenue Chart -->
+    <div class="chart-container">
+      <h2>💵 Revenue by Hotel</h2>
+      <canvas id="revenueChart"></canvas>
+    </div>
+
+    <!-- Data Sources Table -->
+    <div class="chart-container">
+      <h2>🔗 Federation Data Sources</h2>
+      <div id="federation-data" class="loading">Loading data sources...</div>
+    </div>
+
+    <!-- Bookings Table -->
+    <div class="chart-container">
+      <h2>📋 Recent Bookings</h2>
+      <div id="bookings-data" class="loading">Loading bookings...</div>
+    </div>
+  </div>
+
+  <script>
+    const API_BASE = 'http://localhost:8080/ords/freepdb1/tourism';
+    let revenueChart = null;
+
+    async function fetchAPI(endpoint, timeout = 5000) {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), timeout);
+      
+      try {
+        const response = await fetch(\\\\, {
+          headers: { 'Accept': 'application/json' },
+          signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+        
+        if (!response.ok) throw new Error(\HTTP \\);
+        return await response.json();
+      } catch (error) {
+        clearTimeout(timeoutId);
+        console.error(\API Error (\):\, error);
+        return null;
+      }
+    }
+
+    async function checkStatus() {
+      const api = await fetchAPI('/analytics/executive_summary');
+      const statusEl = document.getElementById('api-status');
+      if (api) {
+        statusEl.textContent = '✓ ONLINE';
+        statusEl.className = 'status online';
+      } else {
+        statusEl.textContent = '✗ OFFLINE';
+        statusEl.className = 'status offline';
+      }
+    }
+
+    async function loadDashboard() {
+      const data = await fetchAPI('/analytics/executive_summary');
+      if (data) {
+        document.getElementById('kpi-bookings').textContent = data.bookings_count || '0';
+        document.getElementById('kpi-revenue').textContent = (data.total_revenue || '0').toString().replace(/EUR/g, '');
+        document.getElementById('kpi-hotels').textContent = data.active_hotels || '0';
+        document.getElementById('kpi-avg').textContent = (data.average_booking_value || '0').toString().replace(/EUR/g, '');
+      }
+    }
+
+    async function loadRevenueChart() {
+      const data = await fetchAPI('/analytics/revenue_analysis');
+      if (data && data.hotels) {
+        const ctx = document.getElementById('revenueChart').getContext('2d');
+        
+        if (revenueChart) revenueChart.destroy();
+        
+        revenueChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: data.hotels.map(h => h.hotel_name || 'Unknown'),
+            datasets: [{
+              label: 'Revenue (EUR)',
+              data: data.hotels.map(h => h.total_revenue || 0),
+              backgroundColor: ['#667eea', '#764ba2', '#f093fb'],
+              borderRadius: 5
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: { legend: { display: false } },
+            scales: { y: { beginAtZero: true } }
+          }
+        });
+      }
+    }
+
+    async function loadFederationData() {
+      const data = await fetchAPI('/federation/summary');
+      const container = document.getElementById('federation-data');
+      
+      if (data && data.sources) {
+        let html = '<table><tr><th>Data Source</th><th>Records</th><th>Access Method</th><th>Status</th></tr>';
+        data.sources.forEach(s => {
+          html += \<tr>
+            <td><strong>\</strong></td>
+            <td>\</td>
+            <td>\</td>
+            <td>✓ Online</td>
+          </tr>\;
+        });
+        html += '</table>';
+        container.innerHTML = html;
+      } else {
+        container.innerHTML = '<div class="error">Failed to load federation data</div>';
+      }
+    }
+
+    async function loadBookings() {
+      const data = await fetchAPI('/consolidation/bookings');
+      const container = document.getElementById('bookings-data');
+      
+      if (data && data.bookings) {
+        let html = '<table><tr><th>Guest</th><th>Hotel</th><th>Check-In</th><th>Check-Out</th><th>Price</th></tr>';
+        data.bookings.slice(0, 5).forEach(b => {
+          html += \<tr>
+            <td>\</td>
+            <td>\</td>
+            <td>\</td>
+            <td>\</td>
+            <td>€\</td>
+          </tr>\;
+        });
+        html += '</table>';
+        container.innerHTML = html;
+      } else {
+        container.innerHTML = '<div class="error">Failed to load bookings</div>';
+      }
+    }
+
+    async function init() {
+      console.log('Dashboard initializing...');
+      console.log('API Base:', API_BASE);
+      
+      await checkStatus();
+      await loadDashboard();
+      await loadRevenueChart();
+      await loadFederationData();
+      await loadBookings();
+      
+      setInterval(async () => {
+        await loadDashboard();
+        await loadRevenueChart();
+      }, 30000);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+###############################################################################
+# Oracle Database 21c Express Edition - Silent Installation Response File
+# 
+# SECURITY CONFIGURATION FOR WINDOWS LOCAL INSTALLATION
+# 
+# This file automates the Oracle XE 21c installation with security hardening
+# Edit PASSWORD fields below before running installation!
+###############################################################################
+
+# Oracle installation base directory
+ORACLE_BASE=C:\Oracle
+
+# Oracle home directory
+ORACLE_HOME=C:\Oracle\product\21c
+
+# Oracle home name (appears in Windows registry)
+ORACLE_HOME_NAME=OracleXE21c
+
+# Database name
+ORACLE_SID=XEPDB1
+
+# Database character set (supports international characters)
+# AL32UTF8 = Unicode UTF-8 (recommended for modern applications)
+ORACLE_CHARACTERSET=AL32UTF8
+
+# National character set (for NCHAR, NVARCHAR2 types)
+NATIONAL_CHARACTERSET=AL16UTF16
+
+# Edition type
+ORACLE_EDITION=express
+
+###############################################################################
+# SECURITY CRITICAL: Database Administrator Passwords
+# 
+# ⚠️  REQUIREMENTS (all passwords must meet these):
+#    - Minimum 12 characters (XE allows less, but best practice is 12+)
+#    - At least 1 uppercase letter (A-Z)
+#    - At least 1 lowercase letter (a-z)  
+#    - At least 1 digit (0-9)
+#    - At least 1 special character (!@#$%^&*)
+#    - No dictionary words
+#    - No usernames (reverse, forward, or variations)
+#
+# EXAMPLES OF STRONG PASSWORDS:
+#    - Sec@2025Xp!Db
+#    - Oracle_TourismDb#2025
+#    - TourDB2025!@Secure
+#
+# NEVER use: password123, Oracle2025, welcome, admin, etc.
+###############################################################################
+
+# SYS user password (System privilege - HIGHEST ACCESS)
+# Used for database administration and critical operations
+ORACLE_PWD=Tourism2025!@XeSecure
+
+###############################################################################
+# Installation Configuration
+###############################################################################
+
+# Install type
+INSTALL_TYPE=Express Edition
+
+# Installation option (combination database + tools)
+ORACLE_INSTALL_TYPE=INSTALL_DB_AND_CONFIG
+
+# Configure AS ADMIN flag (leave as true)
+ADMGR_OID_ENABLED_INSTALLATION=true
+
+###############################################################################
+# Listener Configuration (Network Communication)
+###############################################################################
+
+# Listener name
+LISTENER_1_NAME=LISTENER
+
+# Listener protocol (TCP = standard network protocol)
+LISTENER_1_PROTOCOLS=TCP
+
+# Listener port (1521 = Oracle standard)
+LISTENER_1_PORT=1521
+
+# Listener hostname (localhost = only local connections)
+LISTENER_1_HOSTNAME=localhost
+
+# Service name
+ORACLE_SERVICE_NAME=XEPDB1
+
+###############################################################################  
+# Components to Install
+###############################################################################
+
+# Enable database
+COMPONENT_NAMES=db_mgmt_c4
+
+# Enable AS components (not needed for XE)
+COMPONENT_AS=false
+
+# Enable partitioning
+COMPONENT_PARTITIONING=false
+
+# Enable compression
+COMPONENT_COMPRESSION=true
+
+# Enable advanced security module
+COMPONENT_ASM=false
+
+###############################################################################
+# Security & Compliance
+###############################################################################
+
+# Enable security updates during installation
+# Set to 'false' if you don't want to send usage data to Oracle
+DECLINE_SECURITY_UPDATES=true
+
+# Enable Oracle Update Auto-Search
+AUTOMATIC_UPDATES=false
+
+###############################################################################
+# Memory & Performance Configuration
+###############################################################################
+
+# SGA (System Global Area) - shared memory pool
+# For XE on Windows: Keep moderate (500MB-2GB)
+# Auto-sizing: -1 (recommended)
+DB_MEMORY_TARGET=-1
+
+# Processes limit (max concurrent database processes)
+# XE default: 300
+PROCESSES=300
+
+###############################################################################
+# Staging Location (where Oracle writes during installation)
+###############################################################################
+
+# Temporary staging directory for installation files
+# Use local fast disk (not network)
+ORACLE_STAGE_LOCATION=C:\OracleTemp
+
+###############################################################################
+# Optional Advanced Settings
+###############################################################################
+
+# Listener advanced security option
+# true = enable strong authentication & encryption by default
+ADVANCED_SECURITY_ENABLED=true
+
+# Configuration Assistant Mode
+ORACLE_CONFIGURE_AS_MODE=oracle
+
+# Clean Installation (remove previous attempts)
+CLEAN_AS_INSTALL=true
+
+# Skip network configuration
+SKIP_NET_CONFIGURATION=false
+
+###############################################################################
+# Database Features - Performance (optional, for advanced tuning)
+###############################################################################
+
+# Inmemory (can use 2GB automatically)
+INMEMORY=true
+
+# Multitenant configuration (keep as single container)
+MULTITENANT=false
+
+###############################################################################
+# IMPORTANT NOTES:
+#
+# 1. This response file must be placed at: C:\oracle_install.rsp
+#
+# 2. Run installation with:
+#    setup.exe -silent -responseFile C:\oracle_install.rsp
+#
+# 3. Logs will be created at:
+#    C:\Oracle\product\21c\install\logs\
+#
+# 4. CHANGE THE PASSWORD immediately if this file is shared!
+#    It contains the SYS password which is CRITICAL for database security.
+#
+# 5. After installation, run the post-security hardening scripts
+#    from the ORACLE_LOCAL_SECURE_INSTALL.md guide
+#
+###############################################################################

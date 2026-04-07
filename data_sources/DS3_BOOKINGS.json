@@ -1,0 +1,2299 @@
+{
+  "bookings": [
+    {
+      "booking_id": "BK001",
+      "booking_date": "2025-01-15",
+      "guest": {
+        "guest_id": "G001",
+        "first_name": "John",
+        "last_name": "Smith",
+        "email": "john.smith@email.com",
+        "country_of_origin": "United Kingdom",
+        "age_group": "30-40"
+      },
+      "itinerary": {
+        "destination": "Barcelona",
+        "travel_type": "Tourism",
+        "start_date": "2025-03-01",
+        "end_date": "2025-03-08",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL045",
+          "quantity": 2,
+          "price_per_unit": 280,
+          "currency": "EUR",
+          "subtotal": 560
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H001",
+          "quantity": 7,
+          "price_per_unit": 150,
+          "currency": "EUR",
+          "subtotal": 1050
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 1610,
+        "tax_rate": 0.21,
+        "tax_amount": 338.10,
+        "total_eur": 1948.10,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-01-16"
+      }
+    },
+    {
+      "booking_id": "BK002",
+      "booking_date": "2025-01-16",
+      "guest": {
+        "guest_id": "G002",
+        "first_name": "Marie",
+        "last_name": "Dupont",
+        "email": "marie.dupont@email.fr",
+        "country_of_origin": "France",
+        "age_group": "25-29"
+      },
+      "itinerary": {
+        "destination": "Vienna",
+        "travel_type": "Business",
+        "start_date": "2025-02-10",
+        "end_date": "2025-02-14",
+        "duration_days": 4
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL008",
+          "quantity": 2,
+          "price_per_unit": 140,
+          "currency": "EUR",
+          "subtotal": 280
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H004",
+          "quantity": 4,
+          "price_per_unit": 200,
+          "currency": "EUR",
+          "subtotal": 800
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 1080,
+        "tax_rate": 0.20,
+        "tax_amount": 216.00,
+        "total_eur": 1296.00,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-01-16"
+      }
+    },
+    {
+      "booking_id": "BK003",
+      "booking_date": "2025-01-18",
+      "guest": {
+        "guest_id": "G003",
+        "first_name": "Antonio",
+        "last_name": "Garcia",
+        "email": "agarcia@email.es",
+        "country_of_origin": "Spain",
+        "age_group": "40-50"
+      },
+      "itinerary": {
+        "destination": "Prague",
+        "travel_type": "Tourism",
+        "start_date": "2025-04-15",
+        "end_date": "2025-04-22",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL010",
+          "quantity": 2,
+          "price_per_unit": 130,
+          "currency": "EUR",
+          "subtotal": 260
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H003",
+          "quantity": 7,
+          "price_per_unit": 85,
+          "currency": "EUR",
+          "subtotal": 595
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 855,
+        "tax_rate": 0.21,
+        "tax_amount": 179.55,
+        "total_eur": 1034.55,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-01-19"
+      }
+    },
+    {
+      "booking_id": "BK004",
+      "booking_date": "2025-01-20",
+      "guest": {
+        "guest_id": "G004",
+        "first_name": "Sofia",
+        "last_name": "Mueller",
+        "email": "smueller@email.de",
+        "country_of_origin": "Germany",
+        "age_group": "20-25"
+      },
+      "itinerary": {
+        "destination": "Amsterdam",
+        "travel_type": "Tourism",
+        "start_date": "2025-03-20",
+        "end_date": "2025-03-27",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL037",
+          "quantity": 2,
+          "price_per_unit": 130,
+          "currency": "EUR",
+          "subtotal": 260
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H008",
+          "quantity": 7,
+          "price_per_unit": 165,
+          "currency": "EUR",
+          "subtotal": 1155
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 1415,
+        "tax_rate": 0.21,
+        "tax_amount": 297.15,
+        "total_eur": 1712.15,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-01-21"
+      }
+    },
+    {
+      "booking_id": "BK005",
+      "booking_date": "2025-01-22",
+      "guest": {
+        "guest_id": "G005",
+        "first_name": "Elena",
+        "last_name": "Rossi",
+        "email": "erossi@email.it",
+        "country_of_origin": "Italy",
+        "age_group": "35-45"
+      },
+      "itinerary": {
+        "destination": "Paris",
+        "travel_type": "Tourism",
+        "start_date": "2025-05-10",
+        "end_date": "2025-05-17",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL023",
+          "quantity": 2,
+          "price_per_unit": 100,
+          "currency": "EUR",
+          "subtotal": 200
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H002",
+          "quantity": 7,
+          "price_per_unit": 180,
+          "currency": "EUR",
+          "subtotal": 1260
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 1460,
+        "tax_rate": 0.20,
+        "tax_amount": 292.00,
+        "total_eur": 1752.00,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-01-23"
+      }
+    },
+    {
+      "booking_id": "BK006",
+      "booking_date": "2025-01-24",
+      "guest": {
+        "guest_id": "G006",
+        "first_name": "Klaus",
+        "last_name": "Schmidt",
+        "email": "kschmidt@email.de",
+        "country_of_origin": "Germany",
+        "age_group": "55-65"
+      },
+      "itinerary": {
+        "destination": "Budapest",
+        "travel_type": "Health & Wellness",
+        "start_date": "2025-03-15",
+        "end_date": "2025-03-22",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL006",
+          "quantity": 2,
+          "price_per_unit": 120,
+          "currency": "EUR",
+          "subtotal": 240
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H005",
+          "quantity": 7,
+          "price_per_unit": 110,
+          "currency": "EUR",
+          "subtotal": 770
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 1010,
+        "tax_rate": 0.27,
+        "tax_amount": 272.70,
+        "total_eur": 1282.70,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-01-25"
+      }
+    },
+    {
+      "booking_id": "BK007",
+      "booking_date": "2025-01-26",
+      "guest": {
+        "guest_id": "G007",
+        "first_name": "Olivia",
+        "last_name": "Johnson",
+        "email": "ojohnson@email.us",
+        "country_of_origin": "United States",
+        "age_group": "28-35"
+      },
+      "itinerary": {
+        "destination": "Barcelona",
+        "travel_type": "Tourism",
+        "start_date": "2025-06-01",
+        "end_date": "2025-06-08",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL070",
+          "quantity": 2,
+          "price_per_unit": 750,
+          "currency": "EUR",
+          "subtotal": 1500
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H001",
+          "quantity": 7,
+          "price_per_unit": 150,
+          "currency": "EUR",
+          "subtotal": 1050
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 2550,
+        "tax_rate": 0.21,
+        "tax_amount": 535.50,
+        "total_eur": 3085.50,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-01-27"
+      }
+    },
+    {
+      "booking_id": "BK008",
+      "booking_date": "2025-01-28",
+      "guest": {
+        "guest_id": "G008",
+        "first_name": "Catherine",
+        "last_name": "Lewis",
+        "email": "clewis@email.co.uk",
+        "country_of_origin": "United Kingdom",
+        "age_group": "45-55"
+      },
+      "itinerary": {
+        "destination": "Venice",
+        "travel_type": "Cultural",
+        "start_date": "2025-04-10",
+        "end_date": "2025-04-17",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL100",
+          "quantity": 2,
+          "price_per_unit": 200,
+          "currency": "EUR",
+          "subtotal": 400
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H002",
+          "quantity": 7,
+          "price_per_unit": 180,
+          "currency": "EUR",
+          "subtotal": 1260
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 1660,
+        "tax_rate": 0.22,
+        "tax_amount": 365.20,
+        "total_eur": 2025.20,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-01-29"
+      }
+    },
+    {
+      "booking_id": "BK009",
+      "booking_date": "2025-02-01",
+      "guest": {
+        "guest_id": "G009",
+        "first_name": "Lars",
+        "last_name": "Nielsen",
+        "email": "lnielsen@email.dk",
+        "country_of_origin": "Denmark",
+        "age_group": "30-40"
+      },
+      "itinerary": {
+        "destination": "Prague",
+        "travel_type": "Tourism",
+        "start_date": "2025-05-20",
+        "end_date": "2025-05-27",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL035",
+          "quantity": 2,
+          "price_per_unit": 115,
+          "currency": "EUR",
+          "subtotal": 230
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H003",
+          "quantity": 7,
+          "price_per_unit": 85,
+          "currency": "EUR",
+          "subtotal": 595
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 825,
+        "tax_rate": 0.21,
+        "tax_amount": 173.25,
+        "total_eur": 998.25,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-02-02"
+      }
+    },
+    {
+      "booking_id": "BK010",
+      "booking_date": "2025-02-03",
+      "guest": {
+        "guest_id": "G010",
+        "first_name": "Anna",
+        "last_name": "Kowalski",
+        "email": "akowalski@email.pl",
+        "country_of_origin": "Poland",
+        "age_group": "25-35"
+      },
+      "itinerary": {
+        "destination": "Berlin",
+        "travel_type": "Tourism",
+        "start_date": "2025-07-05",
+        "end_date": "2025-07-12",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL015",
+          "quantity": 2,
+          "price_per_unit": 160,
+          "currency": "EUR",
+          "subtotal": 320
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H007",
+          "quantity": 7,
+          "price_per_unit": 140,
+          "currency": "EUR",
+          "subtotal": 980
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 1300,
+        "tax_rate": 0.19,
+        "tax_amount": 247.00,
+        "total_eur": 1547.00,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-02-04"
+      }
+    },
+    {
+      "booking_id": "BK011",
+      "booking_date": "2025-02-05",
+      "guest": {
+        "guest_id": "G011",
+        "first_name": "Pierre",
+        "last_name": "Leclerc",
+        "email": "pleclerc@email.fr",
+        "country_of_origin": "France",
+        "age_group": "50-60"
+      },
+      "itinerary": {
+        "destination": "Rome",
+        "travel_type": "Cultural",
+        "start_date": "2025-03-28",
+        "end_date": "2025-04-04",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL021",
+          "quantity": 2,
+          "price_per_unit": 680,
+          "currency": "EUR",
+          "subtotal": 1360
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H001",
+          "quantity": 7,
+          "price_per_unit": 150,
+          "currency": "EUR",
+          "subtotal": 1050
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 2410,
+        "tax_rate": 0.22,
+        "tax_amount": 530.20,
+        "total_eur": 2940.20,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-02-06"
+      }
+    },
+    {
+      "booking_id": "BK012",
+      "booking_date": "2025-02-07",
+      "guest": {
+        "guest_id": "G012",
+        "first_name": "Carlos",
+        "last_name": "Fernandez",
+        "email": "cfernandez@email.es",
+        "country_of_origin": "Spain",
+        "age_group": "35-45"
+      },
+      "itinerary": {
+        "destination": "Vienna",
+        "travel_type": "Tourism",
+        "start_date": "2025-05-15",
+        "end_date": "2025-05-22",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL033",
+          "quantity": 2,
+          "price_per_unit": 190,
+          "currency": "EUR",
+          "subtotal": 380
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H004",
+          "quantity": 7,
+          "price_per_unit": 200,
+          "currency": "EUR",
+          "subtotal": 1400
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 1780,
+        "tax_rate": 0.20,
+        "tax_amount": 356.00,
+        "total_eur": 2136.00,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-02-08"
+      }
+    },
+    {
+      "booking_id": "BK013",
+      "booking_date": "2025-02-09",
+      "guest": {
+        "guest_id": "G013",
+        "first_name": "Eva",
+        "last_name": "Novak",
+        "email": "enovak@email.cz",
+        "country_of_origin": "Czech Republic",
+        "age_group": "28-35"
+      },
+      "itinerary": {
+        "destination": "Paris",
+        "travel_type": "Romance",
+        "start_date": "2025-04-20",
+        "end_date": "2025-04-27",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL017",
+          "quantity": 2,
+          "price_per_unit": 125,
+          "currency": "EUR",
+          "subtotal": 250
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H002",
+          "quantity": 7,
+          "price_per_unit": 180,
+          "currency": "EUR",
+          "subtotal": 1260
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 1510,
+        "tax_rate": 0.20,
+        "tax_amount": 302.00,
+        "total_eur": 1812.00,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-02-10"
+      }
+    },
+    {
+      "booking_id": "BK014",
+      "booking_date": "2025-02-11",
+      "guest": {
+        "guest_id": "G014",
+        "first_name": "James",
+        "last_name": "Wilson",
+        "email": "jwilson@email.com",
+        "country_of_origin": "United States",
+        "age_group": "40-50"
+      },
+      "itinerary": {
+        "destination": "Budapest",
+        "travel_type": "Health & Wellness",
+        "start_date": "2025-06-10",
+        "end_date": "2025-06-17",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL011",
+          "quantity": 2,
+          "price_per_unit": 720,
+          "currency": "EUR",
+          "subtotal": 1440
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H005",
+          "quantity": 7,
+          "price_per_unit": 110,
+          "currency": "EUR",
+          "subtotal": 770
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 2210,
+        "tax_rate": 0.27,
+        "tax_amount": 596.70,
+        "total_eur": 2806.70,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-02-12"
+      }
+    },
+    {
+      "booking_id": "BK015",
+      "booking_date": "2025-02-13",
+      "guest": {
+        "guest_id": "G015",
+        "first_name": "Beatrice",
+        "last_name": "Moretti",
+        "email": "bmoretti@email.it",
+        "country_of_origin": "Italy",
+        "age_group": "30-40"
+      },
+      "itinerary": {
+        "destination": "Amsterdam",
+        "travel_type": "Tourism",
+        "start_date": "2025-07-15",
+        "end_date": "2025-07-22",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL029",
+          "quantity": 2,
+          "price_per_unit": 155,
+          "currency": "EUR",
+          "subtotal": 310
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H008",
+          "quantity": 7,
+          "price_per_unit": 165,
+          "currency": "EUR",
+          "subtotal": 1155
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 1465,
+        "tax_rate": 0.21,
+        "tax_amount": 307.65,
+        "total_eur": 1772.65,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-02-14"
+      }
+    },
+    {
+      "booking_id": "BK016",
+      "booking_date": "2025-02-15",
+      "guest": {
+        "guest_id": "G016",
+        "first_name": "Robert",
+        "last_name": "Hansen",
+        "email": "rhansen@email.se",
+        "country_of_origin": "Sweden",
+        "age_group": "55-65"
+      },
+      "itinerary": {
+        "destination": "Prague",
+        "travel_type": "Tourism",
+        "start_date": "2025-08-05",
+        "end_date": "2025-08-12",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL090",
+          "quantity": 2,
+          "price_per_unit": 140,
+          "currency": "EUR",
+          "subtotal": 280
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H003",
+          "quantity": 7,
+          "price_per_unit": 85,
+          "currency": "EUR",
+          "subtotal": 595
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 875,
+        "tax_rate": 0.21,
+        "tax_amount": 183.75,
+        "total_eur": 1058.75,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-02-16"
+      }
+    },
+    {
+      "booking_id": "BK017",
+      "booking_date": "2025-02-17",
+      "guest": {
+        "guest_id": "G017",
+        "first_name": "Isabelle",
+        "last_name": "Martin",
+        "email": "imartin@email.fr",
+        "country_of_origin": "France",
+        "age_group": "26-35"
+      },
+      "itinerary": {
+        "destination": "Barcelona",
+        "travel_type": "Tourism",
+        "start_date": "2025-08-20",
+        "end_date": "2025-08-27",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL003",
+          "quantity": 2,
+          "price_per_unit": 150,
+          "currency": "EUR",
+          "subtotal": 300
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H001",
+          "quantity": 7,
+          "price_per_unit": 150,
+          "currency": "EUR",
+          "subtotal": 1050
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 1350,
+        "tax_rate": 0.21,
+        "tax_amount": 283.50,
+        "total_eur": 1633.50,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-02-18"
+      }
+    },
+    {
+      "booking_id": "BK018",
+      "booking_date": "2025-02-19",
+      "guest": {
+        "guest_id": "G018",
+        "first_name": "Giuseppe",
+        "last_name": "Bianchi",
+        "email": "gbianchi@email.it",
+        "country_of_origin": "Italy",
+        "age_group": "50-60"
+      },
+      "itinerary": {
+        "destination": "Vienna",
+        "travel_type": "Business",
+        "start_date": "2025-09-10",
+        "end_date": "2025-09-14",
+        "duration_days": 4
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL007",
+          "quantity": 2,
+          "price_per_unit": 140,
+          "currency": "EUR",
+          "subtotal": 280
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H004",
+          "quantity": 4,
+          "price_per_unit": 200,
+          "currency": "EUR",
+          "subtotal": 800
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 1080,
+        "tax_rate": 0.20,
+        "tax_amount": 216.00,
+        "total_eur": 1296.00,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-02-20"
+      }
+    },
+    {
+      "booking_id": "BK019",
+      "booking_date": "2025-02-21",
+      "guest": {
+        "guest_id": "G019",
+        "first_name": "Helen",
+        "last_name": "Clark",
+        "email": "hclark@email.au",
+        "country_of_origin": "Australia",
+        "age_group": "35-45"
+      },
+      "itinerary": {
+        "destination": "Paris",
+        "travel_type": "Tourism",
+        "start_date": "2025-09-25",
+        "end_date": "2025-10-02",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL095",
+          "quantity": 2,
+          "price_per_unit": 720,
+          "currency": "EUR",
+          "subtotal": 1440
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H002",
+          "quantity": 7,
+          "price_per_unit": 180,
+          "currency": "EUR",
+          "subtotal": 1260
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 2700,
+        "tax_rate": 0.20,
+        "tax_amount": 540.00,
+        "total_eur": 3240.00,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-02-22"
+      }
+    },
+    {
+      "booking_id": "BK020",
+      "booking_date": "2025-02-23",
+      "guest": {
+        "guest_id": "G020",
+        "first_name": "Patrick",
+        "last_name": "O'Brien",
+        "email": "pobrien@email.ie",
+        "country_of_origin": "Ireland",
+        "age_group": "40-50"
+      },
+      "itinerary": {
+        "destination": "Berlin",
+        "travel_type": "Tourism",
+        "start_date": "2025-10-10",
+        "end_date": "2025-10-17",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL015",
+          "quantity": 2,
+          "price_per_unit": 160,
+          "currency": "EUR",
+          "subtotal": 320
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H007",
+          "quantity": 7,
+          "price_per_unit": 140,
+          "currency": "EUR",
+          "subtotal": 980
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 1300,
+        "tax_rate": 0.19,
+        "tax_amount": 247.00,
+        "total_eur": 1547.00,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-02-24"
+      }
+    },
+    {
+      "booking_id": "BK021",
+      "booking_date": "2025-02-25",
+      "guest": {
+        "guest_id": "G021",
+        "first_name": "Nora",
+        "last_name": "Larsson",
+        "email": "nlarsson@email.se",
+        "country_of_origin": "Sweden",
+        "age_group": "25-35"
+      },
+      "itinerary": {
+        "destination": "Budapest",
+        "travel_type": "Health & Wellness",
+        "start_date": "2025-10-22",
+        "end_date": "2025-10-29",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL065",
+          "quantity": 2,
+          "price_per_unit": 160,
+          "currency": "EUR",
+          "subtotal": 320
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H005",
+          "quantity": 7,
+          "price_per_unit": 110,
+          "currency": "EUR",
+          "subtotal": 770
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 1090,
+        "tax_rate": 0.27,
+        "tax_amount": 294.30,
+        "total_eur": 1384.30,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-02-26"
+      }
+    },
+    {
+      "booking_id": "BK022",
+      "booking_date": "2025-02-27",
+      "guest": {
+        "guest_id": "G022",
+        "first_name": "Dimitri",
+        "last_name": "Petrov",
+        "email": "dpetrov@email.ru",
+        "country_of_origin": "Russia",
+        "age_group": "45-55"
+      },
+      "itinerary": {
+        "destination": "Prague",
+        "travel_type": "Tourism",
+        "start_date": "2025-11-05",
+        "end_date": "2025-11-12",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL009",
+          "quantity": 2,
+          "price_per_unit": 130,
+          "currency": "EUR",
+          "subtotal": 260
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H003",
+          "quantity": 7,
+          "price_per_unit": 85,
+          "currency": "EUR",
+          "subtotal": 595
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 855,
+        "tax_rate": 0.21,
+        "tax_amount": 179.55,
+        "total_eur": 1034.55,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-02-28"
+      }
+    },
+    {
+      "booking_id": "BK023",
+      "booking_date": "2025-03-01",
+      "guest": {
+        "guest_id": "G023",
+        "first_name": "Carmen",
+        "last_name": "Rodriguez",
+        "email": "crodriguez@email.mx",
+        "country_of_origin": "Mexico",
+        "age_group": "30-40"
+      },
+      "itinerary": {
+        "destination": "Amsterdam",
+        "travel_type": "Tourism",
+        "start_date": "2025-11-15",
+        "end_date": "2025-11-22",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL019",
+          "quantity": 2,
+          "price_per_unit": 150,
+          "currency": "EUR",
+          "subtotal": 300
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H008",
+          "quantity": 7,
+          "price_per_unit": 165,
+          "currency": "EUR",
+          "subtotal": 1155
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 1455,
+        "tax_rate": 0.21,
+        "tax_amount": 305.55,
+        "total_eur": 1760.55,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-03-02"
+      }
+    },
+    {
+      "booking_id": "BK024",
+      "booking_date": "2025-03-03",
+      "guest": {
+        "guest_id": "G024",
+        "first_name": "Mark",
+        "last_name": "Thompson",
+        "email": "mthompson@email.com",
+        "country_of_origin": "United States",
+        "age_group": "50-60"
+      },
+      "itinerary": {
+        "destination": "Vienna",
+        "travel_type": "Business",
+        "start_date": "2025-11-25",
+        "end_date": "2025-11-28",
+        "duration_days": 3
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL033",
+          "quantity": 2,
+          "price_per_unit": 190,
+          "currency": "EUR",
+          "subtotal": 380
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H004",
+          "quantity": 3,
+          "price_per_unit": 200,
+          "currency": "EUR",
+          "subtotal": 600
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 980,
+        "tax_rate": 0.20,
+        "tax_amount": 196.00,
+        "total_eur": 1176.00,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-03-04"
+      }
+    },
+    {
+      "booking_id": "BK025",
+      "booking_date": "2025-03-05",
+      "guest": {
+        "guest_id": "G025",
+        "first_name": "Rachel",
+        "last_name": "White",
+        "email": "rwhite@email.co.uk",
+        "country_of_origin": "United Kingdom",
+        "age_group": "28-35"
+      },
+      "itinerary": {
+        "destination": "Barcelona",
+        "travel_type": "Tourism",
+        "start_date": "2025-12-10",
+        "end_date": "2025-12-17",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL004",
+          "quantity": 2,
+          "price_per_unit": 150,
+          "currency": "EUR",
+          "subtotal": 300
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H001",
+          "quantity": 7,
+          "price_per_unit": 150,
+          "currency": "EUR",
+          "subtotal": 1050
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 1350,
+        "tax_rate": 0.21,
+        "tax_amount": 283.50,
+        "total_eur": 1633.50,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-03-06"
+      }
+    },
+    {
+      "booking_id": "BK026",
+      "booking_date": "2025-03-07",
+      "guest": {
+        "guest_id": "G026",
+        "first_name": "Francois",
+        "last_name": "Desmond",
+        "email": "fdesmond@email.fr",
+        "country_of_origin": "France",
+        "age_group": "35-45"
+      },
+      "itinerary": {
+        "destination": "Prague",
+        "travel_type": "Tourism",
+        "start_date": "2026-01-10",
+        "end_date": "2026-01-17",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL018",
+          "quantity": 2,
+          "price_per_unit": 125,
+          "currency": "EUR",
+          "subtotal": 250
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H003",
+          "quantity": 7,
+          "price_per_unit": 85,
+          "currency": "EUR",
+          "subtotal": 595
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 845,
+        "tax_rate": 0.21,
+        "tax_amount": 177.45,
+        "total_eur": 1022.45,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-03-08"
+      }
+    },
+    {
+      "booking_id": "BK027",
+      "booking_date": "2025-03-09",
+      "guest": {
+        "guest_id": "G027",
+        "first_name": "Monica",
+        "last_name": "Ferrari",
+        "email": "mferrari@email.it",
+        "country_of_origin": "Italy",
+        "age_group": "40-50"
+      },
+      "itinerary": {
+        "destination": "Berlin",
+        "travel_type": "Tourism",
+        "start_date": "2026-01-20",
+        "end_date": "2026-01-27",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL016",
+          "quantity": 2,
+          "price_per_unit": 160,
+          "currency": "EUR",
+          "subtotal": 320
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H007",
+          "quantity": 7,
+          "price_per_unit": 140,
+          "currency": "EUR",
+          "subtotal": 980
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 1300,
+        "tax_rate": 0.19,
+        "tax_amount": 247.00,
+        "total_eur": 1547.00,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-03-10"
+      }
+    },
+    {
+      "booking_id": "BK028",
+      "booking_date": "2025-03-11",
+      "guest": {
+        "guest_id": "G028",
+        "first_name": "Vladimir",
+        "last_name": "Sokolov",
+        "email": "vsokolov@email.ru",
+        "country_of_origin": "Russia",
+        "age_group": "45-55"
+      },
+      "itinerary": {
+        "destination": "Budapest",
+        "travel_type": "Health & Wellness",
+        "start_date": "2026-02-05",
+        "end_date": "2026-02-12",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL027",
+          "quantity": 2,
+          "price_per_unit": 170,
+          "currency": "EUR",
+          "subtotal": 340
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H005",
+          "quantity": 7,
+          "price_per_unit": 110,
+          "currency": "EUR",
+          "subtotal": 770
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 1110,
+        "tax_rate": 0.27,
+        "tax_amount": 299.70,
+        "total_eur": 1409.70,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-03-12"
+      }
+    },
+    {
+      "booking_id": "BK029",
+      "booking_date": "2025-03-13",
+      "guest": {
+        "guest_id": "G029",
+        "first_name": "Sophia",
+        "last_name": "Constantinou",
+        "email": "sconstantinou@email.gr",
+        "country_of_origin": "Greece",
+        "age_group": "30-40"
+      },
+      "itinerary": {
+        "destination": "Paris",
+        "travel_type": "Tourism",
+        "start_date": "2026-02-20",
+        "end_date": "2026-02-27",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL017",
+          "quantity": 2,
+          "price_per_unit": 125,
+          "currency": "EUR",
+          "subtotal": 250
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H002",
+          "quantity": 7,
+          "price_per_unit": 180,
+          "currency": "EUR",
+          "subtotal": 1260
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 1510,
+        "tax_rate": 0.20,
+        "tax_amount": 302.00,
+        "total_eur": 1812.00,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-03-14"
+      }
+    },
+    {
+      "booking_id": "BK030",
+      "booking_date": "2025-03-15",
+      "guest": {
+        "guest_id": "G030",
+        "first_name": "Alexander",
+        "last_name": "Bergstrom",
+        "email": "abergstrom@email.se",
+        "country_of_origin": "Sweden",
+        "age_group": "50-60"
+      },
+      "itinerary": {
+        "destination": "Vienna",
+        "travel_type": "Business",
+        "start_date": "2026-03-08",
+        "end_date": "2026-03-11",
+        "duration_days": 3
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL007",
+          "quantity": 2,
+          "price_per_unit": 140,
+          "currency": "EUR",
+          "subtotal": 280
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H004",
+          "quantity": 3,
+          "price_per_unit": 200,
+          "currency": "EUR",
+          "subtotal": 600
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 880,
+        "tax_rate": 0.20,
+        "tax_amount": 176.00,
+        "total_eur": 1056.00,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-03-16"
+      }
+    },
+    {
+      "booking_id": "BK031",
+      "booking_date": "2025-03-17",
+      "guest": {
+        "guest_id": "G031",
+        "first_name": "Linda",
+        "last_name": "Anderson",
+        "email": "landerson@email.com",
+        "country_of_origin": "United States",
+        "age_group": "35-45"
+      },
+      "itinerary": {
+        "destination": "Barcelona",
+        "travel_type": "Tourism",
+        "start_date": "2026-03-20",
+        "end_date": "2026-03-27",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL031",
+          "quantity": 2,
+          "price_per_unit": 700,
+          "currency": "EUR",
+          "subtotal": 1400
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H001",
+          "quantity": 7,
+          "price_per_unit": 150,
+          "currency": "EUR",
+          "subtotal": 1050
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 2450,
+        "tax_rate": 0.21,
+        "tax_amount": 514.50,
+        "total_eur": 2964.50,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-03-18"
+      }
+    },
+    {
+      "booking_id": "BK032",
+      "booking_date": "2025-03-19",
+      "guest": {
+        "guest_id": "G032",
+        "first_name": "Michael",
+        "last_name": "Brown",
+        "email": "mbrown@email.co.uk",
+        "country_of_origin": "United Kingdom",
+        "age_group": "40-50"
+      },
+      "itinerary": {
+        "destination": "Prague",
+        "travel_type": "Tourism",
+        "start_date": "2026-04-10",
+        "end_date": "2026-04-17",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL013",
+          "quantity": 2,
+          "price_per_unit": 180,
+          "currency": "EUR",
+          "subtotal": 360
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H003",
+          "quantity": 7,
+          "price_per_unit": 85,
+          "currency": "EUR",
+          "subtotal": 595
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 955,
+        "tax_rate": 0.21,
+        "tax_amount": 200.55,
+        "total_eur": 1155.55,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-03-20"
+      }
+    },
+    {
+      "booking_id": "BK033",
+      "booking_date": "2025-03-21",
+      "guest": {
+        "guest_id": "G033",
+        "first_name": "Natalie",
+        "last_name": "Green",
+        "email": "ngreen@email.com",
+        "country_of_origin": "United States",
+        "age_group": "25-30"
+      },
+      "itinerary": {
+        "destination": "Amsterdam",
+        "travel_type": "Tourism",
+        "start_date": "2026-04-25",
+        "end_date": "2026-05-02",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL039",
+          "quantity": 2,
+          "price_per_unit": 120,
+          "currency": "EUR",
+          "subtotal": 240
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H008",
+          "quantity": 7,
+          "price_per_unit": 165,
+          "currency": "EUR",
+          "subtotal": 1155
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 1395,
+        "tax_rate": 0.21,
+        "tax_amount": 292.95,
+        "total_eur": 1687.95,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-03-22"
+      }
+    },
+    {
+      "booking_id": "BK034",
+      "booking_date": "2025-03-23",
+      "guest": {
+        "guest_id": "G034",
+        "first_name": "David",
+        "last_name": "Martinez",
+        "email": "dmartinez@email.es",
+        "country_of_origin": "Spain",
+        "age_group": "30-40"
+      },
+      "itinerary": {
+        "destination": "Berlin",
+        "travel_type": "Tourism",
+        "start_date": "2026-05-15",
+        "end_date": "2026-05-22",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL015",
+          "quantity": 2,
+          "price_per_unit": 160,
+          "currency": "EUR",
+          "subtotal": 320
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H007",
+          "quantity": 7,
+          "price_per_unit": 140,
+          "currency": "EUR",
+          "subtotal": 980
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 1300,
+        "tax_rate": 0.19,
+        "tax_amount": 247.00,
+        "total_eur": 1547.00,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-03-24"
+      }
+    },
+    {
+      "booking_id": "BK035",
+      "booking_date": "2025-03-25",
+      "guest": {
+        "guest_id": "G035",
+        "first_name": "Veronica",
+        "last_name": "Santos",
+        "email": "vsantos@email.pt",
+        "country_of_origin": "Portugal",
+        "age_group": "28-35"
+      },
+      "itinerary": {
+        "destination": "Budapest",
+        "travel_type": "Health & Wellness",
+        "start_date": "2026-06-05",
+        "end_date": "2026-06-12",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL006",
+          "quantity": 2,
+          "price_per_unit": 120,
+          "currency": "EUR",
+          "subtotal": 240
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H005",
+          "quantity": 7,
+          "price_per_unit": 110,
+          "currency": "EUR",
+          "subtotal": 770
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 1010,
+        "tax_rate": 0.27,
+        "tax_amount": 272.70,
+        "total_eur": 1282.70,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-03-26"
+      }
+    },
+    {
+      "booking_id": "BK036",
+      "booking_date": "2025-03-27",
+      "guest": {
+        "guest_id": "G036",
+        "first_name": "Thomas",
+        "last_name": "Jensen",
+        "email": "tjensen@email.dk",
+        "country_of_origin": "Denmark",
+        "age_group": "35-45"
+      },
+      "itinerary": {
+        "destination": "Paris",
+        "travel_type": "Romance",
+        "start_date": "2026-06-20",
+        "end_date": "2026-06-27",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL024",
+          "quantity": 2,
+          "price_per_unit": 100,
+          "currency": "EUR",
+          "subtotal": 200
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H002",
+          "quantity": 7,
+          "price_per_unit": 180,
+          "currency": "EUR",
+          "subtotal": 1260
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 1460,
+        "tax_rate": 0.20,
+        "tax_amount": 292.00,
+        "total_eur": 1752.00,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-03-28"
+      }
+    },
+    {
+      "booking_id": "BK037",
+      "booking_date": "2025-03-29",
+      "guest": {
+        "guest_id": "G037",
+        "first_name": "Jasmine",
+        "last_name": "Patel",
+        "email": "jpatel@email.in",
+        "country_of_origin": "India",
+        "age_group": "30-40"
+      },
+      "itinerary": {
+        "destination": "Vienna",
+        "travel_type": "Tourism",
+        "start_date": "2026-07-10",
+        "end_date": "2026-07-17",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL011",
+          "quantity": 2,
+          "price_per_unit": 720,
+          "currency": "EUR",
+          "subtotal": 1440
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H004",
+          "quantity": 7,
+          "price_per_unit": 200,
+          "currency": "EUR",
+          "subtotal": 1400
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 2840,
+        "tax_rate": 0.20,
+        "tax_amount": 568.00,
+        "total_eur": 3408.00,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-03-30"
+      }
+    },
+    {
+      "booking_id": "BK038",
+      "booking_date": "2025-03-31",
+      "guest": {
+        "guest_id": "G038",
+        "first_name": "Martin",
+        "last_name": "Eriksson",
+        "email": "meriksson@email.se",
+        "country_of_origin": "Sweden",
+        "age_group": "40-50"
+      },
+      "itinerary": {
+        "destination": "Prague",
+        "travel_type": "Tourism",
+        "start_date": "2026-07-25",
+        "end_date": "2026-08-01",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL009",
+          "quantity": 2,
+          "price_per_unit": 130,
+          "currency": "EUR",
+          "subtotal": 260
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H003",
+          "quantity": 7,
+          "price_per_unit": 85,
+          "currency": "EUR",
+          "subtotal": 595
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 855,
+        "tax_rate": 0.21,
+        "tax_amount": 179.55,
+        "total_eur": 1034.55,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-04-01"
+      }
+    },
+    {
+      "booking_id": "BK039",
+      "booking_date": "2025-04-02",
+      "guest": {
+        "guest_id": "G039",
+        "first_name": "Emilia",
+        "last_name": "Nowak",
+        "email": "enowak@email.pl",
+        "country_of_origin": "Poland",
+        "age_group": "25-35"
+      },
+      "itinerary": {
+        "destination": "Barcelona",
+        "travel_type": "Tourism",
+        "start_date": "2026-08-15",
+        "end_date": "2026-08-22",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL029",
+          "quantity": 2,
+          "price_per_unit": 155,
+          "currency": "EUR",
+          "subtotal": 310
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H001",
+          "quantity": 7,
+          "price_per_unit": 150,
+          "currency": "EUR",
+          "subtotal": 1050
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 1360,
+        "tax_rate": 0.21,
+        "tax_amount": 285.60,
+        "total_eur": 1645.60,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-04-03"
+      }
+    },
+    {
+      "booking_id": "BK040",
+      "booking_date": "2025-04-04",
+      "guest": {
+        "guest_id": "G040",
+        "first_name": "Richard",
+        "last_name": "Davidson",
+        "email": "rdavidson@email.com",
+        "country_of_origin": "United States",
+        "age_group": "50-60"
+      },
+      "itinerary": {
+        "destination": "Amsterdam",
+        "travel_type": "Tourism",
+        "start_date": "2026-09-05",
+        "end_date": "2026-09-12",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL032",
+          "quantity": 2,
+          "price_per_unit": 700,
+          "currency": "EUR",
+          "subtotal": 1400
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H008",
+          "quantity": 7,
+          "price_per_unit": 165,
+          "currency": "EUR",
+          "subtotal": 1155
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 2555,
+        "tax_rate": 0.21,
+        "tax_amount": 536.55,
+        "total_eur": 3091.55,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-04-05"
+      }
+    },
+    {
+      "booking_id": "BK041",
+      "booking_date": "2025-04-06",
+      "guest": {
+        "guest_id": "G041",
+        "first_name": "Sophie",
+        "last_name": "Muller",
+        "email": "smuller@email.ch",
+        "country_of_origin": "Switzerland",
+        "age_group": "35-45"
+      },
+      "itinerary": {
+        "destination": "Berlin",
+        "travel_type": "Tourism",
+        "start_date": "2026-09-20",
+        "end_date": "2026-09-27",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL085",
+          "quantity": 2,
+          "price_per_unit": 135,
+          "currency": "EUR",
+          "subtotal": 270
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H007",
+          "quantity": 7,
+          "price_per_unit": 140,
+          "currency": "EUR",
+          "subtotal": 980
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 1250,
+        "tax_rate": 0.19,
+        "tax_amount": 237.50,
+        "total_eur": 1487.50,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-04-07"
+      }
+    },
+    {
+      "booking_id": "BK042",
+      "booking_date": "2025-04-08",
+      "guest": {
+        "guest_id": "G042",
+        "first_name": "Giuseppe",
+        "last_name": "Romano",
+        "email": "gromano@email.it",
+        "country_of_origin": "Italy",
+        "age_group": "55-65"
+      },
+      "itinerary": {
+        "destination": "Budapest",
+        "travel_type": "Health & Wellness",
+        "start_date": "2026-10-10",
+        "end_date": "2026-10-17",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL013",
+          "quantity": 2,
+          "price_per_unit": 180,
+          "currency": "EUR",
+          "subtotal": 360
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H005",
+          "quantity": 7,
+          "price_per_unit": 110,
+          "currency": "EUR",
+          "subtotal": 770
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 1130,
+        "tax_rate": 0.27,
+        "tax_amount": 305.10,
+        "total_eur": 1435.10,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-04-09"
+      }
+    },
+    {
+      "booking_id": "BK043",
+      "booking_date": "2025-04-10",
+      "guest": {
+        "guest_id": "G043",
+        "first_name": "Lucia",
+        "last_name": "Rossi",
+        "email": "lrossi@email.it",
+        "country_of_origin": "Italy",
+        "age_group": "30-40"
+      },
+      "itinerary": {
+        "destination": "Paris",
+        "travel_type": "Tourism",
+        "start_date": "2026-10-25",
+        "end_date": "2026-11-01",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL021",
+          "quantity": 2,
+          "price_per_unit": 680,
+          "currency": "EUR",
+          "subtotal": 1360
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H002",
+          "quantity": 7,
+          "price_per_unit": 180,
+          "currency": "EUR",
+          "subtotal": 1260
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 2620,
+        "tax_rate": 0.20,
+        "tax_amount": 524.00,
+        "total_eur": 3144.00,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-04-11"
+      }
+    },
+    {
+      "booking_id": "BK044",
+      "booking_date": "2025-04-12",
+      "guest": {
+        "guest_id": "G044",
+        "first_name": "Kevin",
+        "last_name": "O'Connor",
+        "email": "koconnor@email.ie",
+        "country_of_origin": "Ireland",
+        "age_group": "28-35"
+      },
+      "itinerary": {
+        "destination": "Vienna",
+        "travel_type": "Business",
+        "start_date": "2026-11-10",
+        "end_date": "2026-11-13",
+        "duration_days": 3
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL014",
+          "quantity": 2,
+          "price_per_unit": 180,
+          "currency": "EUR",
+          "subtotal": 360
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H004",
+          "quantity": 3,
+          "price_per_unit": 200,
+          "currency": "EUR",
+          "subtotal": 600
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 960,
+        "tax_rate": 0.20,
+        "tax_amount": 192.00,
+        "total_eur": 1152.00,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-04-13"
+      }
+    },
+    {
+      "booking_id": "BK045",
+      "booking_date": "2025-04-14",
+      "guest": {
+        "guest_id": "G045",
+        "first_name": "Petra",
+        "last_name": "Kohl",
+        "email": "pkohl@email.de",
+        "country_of_origin": "Germany",
+        "age_group": "45-55"
+      },
+      "itinerary": {
+        "destination": "Barcelona",
+        "travel_type": "Tourism",
+        "start_date": "2026-11-20",
+        "end_date": "2026-11-27",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL015",
+          "quantity": 2,
+          "price_per_unit": 160,
+          "currency": "EUR",
+          "subtotal": 320
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H001",
+          "quantity": 7,
+          "price_per_unit": 150,
+          "currency": "EUR",
+          "subtotal": 1050
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 1370,
+        "tax_rate": 0.21,
+        "tax_amount": 287.70,
+        "total_eur": 1657.70,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-04-15"
+      }
+    },
+    {
+      "booking_id": "BK046",
+      "booking_date": "2025-04-16",
+      "guest": {
+        "guest_id": "G046",
+        "first_name": "Yuki",
+        "last_name": "Tanaka",
+        "email": "ytanaka@email.jp",
+        "country_of_origin": "Japan",
+        "age_group": "30-40"
+      },
+      "itinerary": {
+        "destination": "Prague",
+        "travel_type": "Tourism",
+        "start_date": "2026-12-05",
+        "end_date": "2026-12-12",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL095",
+          "quantity": 2,
+          "price_per_unit": 720,
+          "currency": "EUR",
+          "subtotal": 1440
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H003",
+          "quantity": 7,
+          "price_per_unit": 85,
+          "currency": "EUR",
+          "subtotal": 595
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 2035,
+        "tax_rate": 0.21,
+        "tax_amount": 427.35,
+        "total_eur": 2462.35,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-04-17"
+      }
+    },
+    {
+      "booking_id": "BK047",
+      "booking_date": "2025-04-18",
+      "guest": {
+        "guest_id": "G047",
+        "first_name": "Aisha",
+        "last_name": "Khan",
+        "email": "akhan@email.pk",
+        "country_of_origin": "Pakistan",
+        "age_group": "25-35"
+      },
+      "itinerary": {
+        "destination": "Amsterdam",
+        "travel_type": "Tourism",
+        "start_date": "2026-12-18",
+        "end_date": "2026-12-25",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL090",
+          "quantity": 2,
+          "price_per_unit": 140,
+          "currency": "EUR",
+          "subtotal": 280
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H008",
+          "quantity": 7,
+          "price_per_unit": 165,
+          "currency": "EUR",
+          "subtotal": 1155
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 1435,
+        "tax_rate": 0.21,
+        "tax_amount": 301.35,
+        "total_eur": 1736.35,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-04-19"
+      }
+    },
+    {
+      "booking_id": "BK048",
+      "booking_date": "2025-04-20",
+      "guest": {
+        "guest_id": "G048",
+        "first_name": "Miguel",
+        "last_name": "Sanchez",
+        "email": "msanchez@email.ar",
+        "country_of_origin": "Argentina",
+        "age_group": "40-50"
+      },
+      "itinerary": {
+        "destination": "Berlin",
+        "travel_type": "Tourism",
+        "start_date": "2027-01-10",
+        "end_date": "2027-01-17",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL032",
+          "quantity": 2,
+          "price_per_unit": 700,
+          "currency": "EUR",
+          "subtotal": 1400
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H007",
+          "quantity": 7,
+          "price_per_unit": 140,
+          "currency": "EUR",
+          "subtotal": 980
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 2380,
+        "tax_rate": 0.19,
+        "tax_amount": 452.20,
+        "total_eur": 2832.20,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-04-21"
+      }
+    },
+    {
+      "booking_id": "BK049",
+      "booking_date": "2025-04-22",
+      "guest": {
+        "guest_id": "G049",
+        "first_name": "Annabella",
+        "last_name": "Costa",
+        "email": "acosta@email.br",
+        "country_of_origin": "Brazil",
+        "age_group": "30-40"
+      },
+      "itinerary": {
+        "destination": "Budapest",
+        "travel_type": "Health & Wellness",
+        "start_date": "2027-01-25",
+        "end_date": "2027-02-01",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL065",
+          "quantity": 2,
+          "price_per_unit": 160,
+          "currency": "EUR",
+          "subtotal": 320
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H005",
+          "quantity": 7,
+          "price_per_unit": 110,
+          "currency": "EUR",
+          "subtotal": 770
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 1090,
+        "tax_rate": 0.27,
+        "tax_amount": 294.30,
+        "total_eur": 1384.30,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-04-23"
+      }
+    },
+    {
+      "booking_id": "BK050",
+      "booking_date": "2025-04-24",
+      "guest": {
+        "guest_id": "G050",
+        "first_name": "Christophe",
+        "last_name": "Dubois",
+        "email": "cdubois@email.fr",
+        "country_of_origin": "France",
+        "age_group": "45-55"
+      },
+      "itinerary": {
+        "destination": "Paris",
+        "travel_type": "Tourism",
+        "start_date": "2027-02-12",
+        "end_date": "2027-02-19",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL023",
+          "quantity": 2,
+          "price_per_unit": 100,
+          "currency": "EUR",
+          "subtotal": 200
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H002",
+          "quantity": 7,
+          "price_per_unit": 180,
+          "currency": "EUR",
+          "subtotal": 1260
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 1460,
+        "tax_rate": 0.20,
+        "tax_amount": 292.00,
+        "total_eur": 1752.00,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-04-25"
+      }
+    },
+    {
+      "booking_id": "BK051",
+      "booking_date": "2025-04-26",
+      "guest": {
+        "guest_id": "G051",
+        "first_name": "Winnie",
+        "last_name": "Wong",
+        "email": "wwong@email.hk",
+        "country_of_origin": "Hong Kong",
+        "age_group": "28-35"
+      },
+      "itinerary": {
+        "destination": "Vienna",
+        "travel_type": "Tourism",
+        "start_date": "2027-03-01",
+        "end_date": "2027-03-08",
+        "duration_days": 7
+      },
+      "booking_items": [
+        {
+          "item_type": "flight",
+          "item_id": "FL012",
+          "quantity": 2,
+          "price_per_unit": 720,
+          "currency": "EUR",
+          "subtotal": 1440
+        },
+        {
+          "item_type": "hotel",
+          "item_id": "H004",
+          "quantity": 7,
+          "price_per_unit": 200,
+          "currency": "EUR",
+          "subtotal": 1400
+        }
+      ],
+      "totals": {
+        "subtotal_eur": 2840,
+        "tax_rate": 0.20,
+        "tax_amount": 568.00,
+        "total_eur": 3408.00,
+        "payment_status": "Confirmed",
+        "payment_date": "2025-04-27"
+      }
+    }
+  ]
+}
