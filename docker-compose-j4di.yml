@@ -1,0 +1,125 @@
+services:
+  # ============================================================================
+  # Database Services
+  # ============================================================================
+  postgres:
+    image: postgres:16-alpine
+    container_name: tourism-postgres
+    environment:
+      POSTGRES_DB: tourism
+      POSTGRES_USER: tourism_user
+      POSTGRES_PASSWORD: tourism_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./1_Data_Sources/12_DS_PG_Schema_Tourism.sql:/docker-entrypoint-initdb.d/01_schema.sql
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U tourism_user -d tourism"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  mongodb:
+    image: mongo:7
+    container_name: tourism-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./1_Data_Sources/mongo_init_tourism.js:/docker-entrypoint-initdb.d/01_init.js
+      - mongodata:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ============================================================================
+  # Spring Boot Microservices
+  # ============================================================================
+  dsa-sql-jpa:
+    build:
+      context: ./src/DSA-SQL-JPAService
+      dockerfile: Dockerfile
+    container_name: dsa-sql-jpa
+    ports:
+      - "8090:8090"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/tourism
+      SPRING_DATASOURCE_USERNAME: tourism_user
+      SPRING_DATASOURCE_PASSWORD: tourism_pass
+
+  dsa-doc-csv:
+    build:
+      context: ./src/DSA-DOC-CSVService
+      dockerfile: Dockerfile
+    container_name: dsa-doc-csv
+    ports:
+      - "8097:8097"
+
+  dsa-nosql-mongodb:
+    build:
+      context: ./src/DSA-NoSQL-MongoDBService
+      dockerfile: Dockerfile
+    container_name: dsa-nosql-mongodb
+    ports:
+      - "8093:8093"
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://mongodb:27017/tourism_data
+
+  # ============================================================================
+  # SparkSQL Integration Engine
+  # ============================================================================
+  sparksql:
+    build:
+      context: ./src/DSA-SparkSQL-Service
+      dockerfile: Dockerfile
+    container_name: tourism-sparksql
+    ports:
+      - "10000:10000"
+      - "4040:4040"
+    volumes:
+      - ./sparksql:/opt/sparksql
+    depends_on:
+      - dsa-sql-jpa
+      - dsa-doc-csv
+      - dsa-nosql-mongodb
+    deploy:
+      resources:
+        limits:
+          memory: 2g
+        reservations:
+          memory: 1g
+    healthcheck:
+      test: ["CMD-SHELL", "nc -z localhost 10000 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+      start_period: 120s
+
+  # ============================================================================
+  # Web REST Service (depends on SparkSQL)
+  # ============================================================================
+  dsa-web-rest:
+    build:
+      context: ./src/DSA-WEB-RESTService
+      dockerfile: Dockerfile
+    container_name: dsa-web-rest
+    ports:
+      - "8096:8096"
+    depends_on:
+      - sparksql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:hive2://sparksql:10000/default
+      SPRING_DATASOURCE_USERNAME: ""
+      SPRING_DATASOURCE_PASSWORD: ""
+
+volumes:
+  pgdata:
+  mongodata:

@@ -1,0 +1,6 @@
+AIRLINE_CODE,AIRLINE_NAME,COUNTRY,FLEET_SIZE,FOUNDED_YEAR,ALLIANCE,WEBSITE
+UA,United Airlines,United States,780,1968,Star Alliance,www.united.com
+BA,British Airways,United Kingdom,288,1974,Oneworld,www.britishairways.com
+LH,Lufthansa,Germany,718,1953,Star Alliance,www.lufthansa.com
+AF,Air France,France,224,1933,SkyTeam,www.airfrance.com
+KL,KLM Royal Dutch Airlines,Netherlands,120,1919,SkyTeam,www.klm.com

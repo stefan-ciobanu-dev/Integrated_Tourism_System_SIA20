@@ -1,0 +1,10 @@
+org\datasource\jpa\views\booking\BookingView.class
+org\datasource\jpa\views\booking\BookingViewBuilder.class
+org\datasource\SpringBootSQLJPADataService.class
+org\datasource\jpa\views\tourist\TouristView.class
+org\datasource\security\BasicConfiguration.class
+org\datasource\jpa\JPADataSourceConnector.class
+org\datasource\jpa\views\hotel\HotelViewBuilder.class
+org\datasource\jpa\views\tourist\TouristViewBuilder.class
+org\datasource\jpa\views\hotel\HotelView.class
+org\datasource\RESTViewServiceJPA.class

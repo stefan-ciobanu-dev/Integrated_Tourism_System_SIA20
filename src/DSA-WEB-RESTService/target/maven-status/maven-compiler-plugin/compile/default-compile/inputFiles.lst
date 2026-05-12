@@ -1,0 +1,11 @@
+D:\Repositories\integration\src\DSA-WEB-RESTService\src\main\java\org\datasource\olap\entities\HotelOccupancyEntity.java
+D:\Repositories\integration\src\DSA-WEB-RESTService\src\main\java\org\datasource\olap\entities\RevenueByDestinationEntity.java
+D:\Repositories\integration\src\DSA-WEB-RESTService\src\main\java\org\datasource\olap\entities\RevenueByTravelTypeEntity.java
+D:\Repositories\integration\src\DSA-WEB-RESTService\src\main\java\org\datasource\olap\entities\RevenueCubeEntity.java
+D:\Repositories\integration\src\DSA-WEB-RESTService\src\main\java\org\datasource\olap\repositories\HotelOccupancyRepository.java
+D:\Repositories\integration\src\DSA-WEB-RESTService\src\main\java\org\datasource\olap\repositories\RevenueByDestinationRepository.java
+D:\Repositories\integration\src\DSA-WEB-RESTService\src\main\java\org\datasource\olap\repositories\RevenueByTravelTypeRepository.java
+D:\Repositories\integration\src\DSA-WEB-RESTService\src\main\java\org\datasource\olap\repositories\RevenueCubeRepository.java
+D:\Repositories\integration\src\DSA-WEB-RESTService\src\main\java\org\datasource\RESTViewServiceOLAP.java
+D:\Repositories\integration\src\DSA-WEB-RESTService\src\main\java\org\datasource\security\BasicConfiguration.java
+D:\Repositories\integration\src\DSA-WEB-RESTService\src\main\java\org\datasource\SpringBootWEBRESTDataService.java

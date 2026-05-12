@@ -1,0 +1,16 @@
+org\datasource\csv\views\flight\FlightView.class
+org\datasource\csv\views\airline\AirlineViewBuilder.class
+org\datasource\csv\views\flight\FlightViewBuilder.class
+org\datasource\csv\CSVResourceFileDataSourceConnector.class
+org\datasource\csv\views\hotelstars\HotelStarsViewBuilder.class
+org\datasource\csv\views\route\RouteView.class
+org\datasource\csv\views\airline\AirlineView.class
+org\datasource\security\BasicConfiguration.class
+org\datasource\csv\views\route\RouteViewBuilder.class
+org\datasource\csv\views\touristage\TouristAgeViewBuilder.class
+org\datasource\csv\views\touristage\TouristAgeView.class
+org\datasource\csv\views\hotelstars\HotelStarsView.class
+org\datasource\csv\views\period\PeriodViewBuilder.class
+org\datasource\SpringBootCSVDataService.class
+org\datasource\csv\views\period\PeriodView.class
+org\datasource\RESTViewServiceCSV.class

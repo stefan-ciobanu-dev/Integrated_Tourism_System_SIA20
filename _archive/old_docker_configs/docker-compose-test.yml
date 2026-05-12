@@ -1,9 +1,0 @@
-services:
-  oracle-db:
-    image: container-registry.oracle.com/database/free:latest
-    container_name: tourism-oracle-test
-    ports:
-      - "1521:1521"
-    environment:
-      ORACLE_PASSWORD: TourismDB2025!
-    restart: no

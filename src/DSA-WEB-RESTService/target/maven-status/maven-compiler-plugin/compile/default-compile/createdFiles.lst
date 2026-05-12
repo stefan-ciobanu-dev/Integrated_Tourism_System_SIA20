@@ -1,0 +1,11 @@
+org\datasource\RESTViewServiceOLAP.class
+org\datasource\olap\entities\HotelOccupancyEntity.class
+org\datasource\security\BasicConfiguration.class
+org\datasource\olap\repositories\RevenueByTravelTypeRepository.class
+org\datasource\olap\entities\RevenueByTravelTypeEntity.class
+org\datasource\olap\repositories\HotelOccupancyRepository.class
+org\datasource\olap\repositories\RevenueByDestinationRepository.class
+org\datasource\SpringBootWEBRESTDataService.class
+org\datasource\olap\entities\RevenueCubeEntity.class
+org\datasource\olap\repositories\RevenueCubeRepository.class
+org\datasource\olap\entities\RevenueByDestinationEntity.class

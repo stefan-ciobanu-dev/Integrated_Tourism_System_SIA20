@@ -1,0 +1,8 @@
+org\datasource\RESTViewServiceMongoDB.class
+org\datasource\mongo\views\currency\CurrencyView.class
+org\datasource\mongo\views\currency\CurrencyViewBuilder.class
+org\datasource\security\BasicConfiguration.class
+org\datasource\mongo\views\booking\MongoBookingView.class
+org\datasource\mongo\MongoDataSourceConnector.class
+org\datasource\mongo\views\booking\MongoBookingViewBuilder.class
+org\datasource\SpringBootMongoDBDataService.class
